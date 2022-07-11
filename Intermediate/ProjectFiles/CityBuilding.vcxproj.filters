@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\CityBuilding.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{F5E6FAEF-A946-481B-9BE1-31B02DE3459D}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\CityBuilding.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\CityBuildingEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\.gitattributes" />
+    <None Include="..\..\.gitignore" />
+    <Filter Include="Config">
+      <UniqueIdentifier>{C02F8B08-BA63-47DF-9B79-F118F7B7E9B0}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\CityBuilding">
+      <UniqueIdentifier>{FB90D2E7-71EE-4F1A-A75B-FB08B42BA238}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\CityBuilding\CityBuilding.Build.cs">
+      <Filter>Source\CityBuilding</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\CityBuilding\PostProcVol.cpp">
+      <Filter>Source\CityBuilding</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\CityBuilding\PostProcVol.h">
+      <Filter>Source\CityBuilding</Filter>
+    </ClInclude>
+    <Filter Include="Source\CityBuilding\Buildings">
+      <UniqueIdentifier>{B3F234C1-FEA8-4A94-9F63-D8CBC620A3F1}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\CityBuilding\Buildings\BuildingManager.cpp">
+      <Filter>Source\CityBuilding\Buildings</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\CityBuilding\Buildings\BuildingManager.h">
+      <Filter>Source\CityBuilding\Buildings</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\CityBuilding\Buildings\BuildingRoad.cpp">
+      <Filter>Source\CityBuilding\Buildings</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\CityBuilding\Buildings\BuildingRoad.h">
+      <Filter>Source\CityBuilding\Buildings</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\CityBuilding\Buildings\Buildings.cpp">
+      <Filter>Source\CityBuilding\Buildings</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\CityBuilding\Buildings\Buildings.h">
+      <Filter>Source\CityBuilding\Buildings</Filter>
+    </ClInclude>
+    <Filter Include="Source\CityBuilding\Components">
+      <UniqueIdentifier>{E9E30F0B-C2FF-4EEA-B943-88F2BD9CD74E}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\CityBuilding\Components\CameraMovementComponent.cpp">
+      <Filter>Source\CityBuilding\Components</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\CityBuilding\Components\CameraMovementComponent.h">
+      <Filter>Source\CityBuilding\Components</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\CityBuilding\Components\ClickHighlightComp.cpp">
+      <Filter>Source\CityBuilding\Components</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\CityBuilding\Components\ClickHighlightComp.h">
+      <Filter>Source\CityBuilding\Components</Filter>
+    </ClInclude>
+    <Filter Include="Source\CityBuilding\Grid">
+      <UniqueIdentifier>{C3D5B0F2-DF66-43A2-A16C-58561923884D}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\CityBuilding\Grid\ActorGridCell.cpp">
+      <Filter>Source\CityBuilding\Grid</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\CityBuilding\Grid\ActorGridCell.h">
+      <Filter>Source\CityBuilding\Grid</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\CityBuilding\Grid\GridManager.cpp">
+      <Filter>Source\CityBuilding\Grid</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\CityBuilding\Grid\GridManager.h">
+      <Filter>Source\CityBuilding\Grid</Filter>
+    </ClInclude>
+    <Filter Include="Source\CityBuilding\Setup">
+      <UniqueIdentifier>{36C1394A-2EF2-4DA2-A8D1-6214DFF96C6E}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\CityBuilding\Setup\CameraPawnRTS.cpp">
+      <Filter>Source\CityBuilding\Setup</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\CityBuilding\Setup\CameraPawnRTS.h">
+      <Filter>Source\CityBuilding\Setup</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\CityBuilding\Setup\CityBuilding.cpp">
+      <Filter>Source\CityBuilding\Setup</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\CityBuilding\Setup\CityBuilding.h">
+      <Filter>Source\CityBuilding\Setup</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\CityBuilding\Setup\MyGameMode.cpp">
+      <Filter>Source\CityBuilding\Setup</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\CityBuilding\Setup\MyGameMode.h">
+      <Filter>Source\CityBuilding\Setup</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\CityBuilding\Setup\MyPlayerController.cpp">
+      <Filter>Source\CityBuilding\Setup</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\CityBuilding\Setup\MyPlayerController.h">
+      <Filter>Source\CityBuilding\Setup</Filter>
+    </ClInclude>
+    <Filter Include="Source\CityBuilding\UI">
+      <UniqueIdentifier>{66B23D14-0463-477C-AE72-19E851FE67F3}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\CityBuilding\UI\MyUserWidget.cpp">
+      <Filter>Source\CityBuilding\UI</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\CityBuilding\UI\MyUserWidget.h">
+      <Filter>Source\CityBuilding\UI</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,13 @@
+E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Development\CityBuilding\Definitions.CityBuilding.h
+E:\Program Files (x86)\UE_4.27\Engine\Source\Runtime\Engine\Classes\GameFramework/SpringArmComponent.h
+E:\Program Files (x86)\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\SpringArmComponent.generated.h
+E:\Program Files (x86)\UE_4.27\Engine\Source\Runtime\Engine\Classes\Components/SphereComponent.h
+E:\Program Files (x86)\UE_4.27\Engine\Source\Runtime\Engine\Classes\Components/ShapeComponent.h
+E:\Program Files (x86)\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\ShapeComponent.generated.h
+E:\Program Files (x86)\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\SphereComponent.generated.h
+E:\Program Files (x86)\UE_4.27\Engine\Source\Runtime\Engine\Classes\Camera/CameraComponent.h
+E:\Program Files (x86)\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\CameraComponent.generated.h
+E:\UE4 PROJECTS\City Building\CityBuilding\Source\CityBuilding/Components/CameraMovementComponent.h
+E:\UE4 PROJECTS\City Building\CityBuilding\Source\CityBuilding/Setup/CameraPawnRTS.h
+E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Inc\CityBuilding\CameraPawnRTS.generated.h
+E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Inc\CityBuilding\CameraMovementComponent.generated.h

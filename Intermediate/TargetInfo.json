@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "CityBuilding",
+			"Path": "E:\\UE4 PROJECTS\\City Building\\CityBuilding\\Source\\CityBuilding.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "CityBuildingEditor",
+			"Path": "E:\\UE4 PROJECTS\\City Building\\CityBuilding\\Source\\CityBuildingEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}

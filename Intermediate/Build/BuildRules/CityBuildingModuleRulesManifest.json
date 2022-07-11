@@ -1,0 +1,8 @@
+{
+	"SourceFiles": [
+		"E:\\UE4 PROJECTS\\City Building\\CityBuilding\\Source\\CityBuilding\\CityBuilding.Build.cs",
+		"E:\\UE4 PROJECTS\\City Building\\CityBuilding\\Source\\CityBuilding.Target.cs",
+		"E:\\UE4 PROJECTS\\City Building\\CityBuilding\\Source\\CityBuildingEditor.Target.cs"
+	],
+	"EngineVersion": "4.27.2"
+}
