@@ -13,8 +13,8 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define CITYBUILDING_MyUserWidget_generated_h
 
-#define CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_15_SPARSE_DATA
-#define CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_15_RPC_WRAPPERS \
+#define CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_18_SPARSE_DATA
+#define CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_18_RPC_WRAPPERS \
  \
 	DECLARE_FUNCTION(execButtonWindmill_Pressed); \
 	DECLARE_FUNCTION(execButtonBuilding_Pressed); \
@@ -23,7 +23,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	DECLARE_FUNCTION(execButtonRoad_Pressed);
 
 
-#define CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
+#define CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_18_RPC_WRAPPERS_NO_PURE_DECLS \
  \
 	DECLARE_FUNCTION(execButtonWindmill_Pressed); \
 	DECLARE_FUNCTION(execButtonBuilding_Pressed); \
@@ -32,7 +32,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	DECLARE_FUNCTION(execButtonRoad_Pressed);
 
 
-#define CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_15_INCLASS_NO_PURE_DECLS \
+#define CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_18_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUMyUserWidget(); \
 	friend struct Z_Construct_UClass_UMyUserWidget_Statics; \
@@ -41,7 +41,7 @@ public: \
 	DECLARE_SERIALIZER(UMyUserWidget)
 
 
-#define CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_15_INCLASS \
+#define CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_18_INCLASS \
 private: \
 	static void StaticRegisterNativesUMyUserWidget(); \
 	friend struct Z_Construct_UClass_UMyUserWidget_Statics; \
@@ -50,7 +50,7 @@ public: \
 	DECLARE_SERIALIZER(UMyUserWidget)
 
 
-#define CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_15_STANDARD_CONSTRUCTORS \
+#define CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_18_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UMyUserWidget(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UMyUserWidget) \
@@ -63,7 +63,7 @@ private: \
 public:
 
 
-#define CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_15_ENHANCED_CONSTRUCTORS \
+#define CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_18_ENHANCED_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UMyUserWidget(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()) : Super(ObjectInitializer) { }; \
 private: \
@@ -76,28 +76,28 @@ public: \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UMyUserWidget)
 
 
-#define CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_15_PRIVATE_PROPERTY_OFFSET
-#define CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_12_PROLOG
-#define CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_15_GENERATED_BODY_LEGACY \
+#define CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_18_PRIVATE_PROPERTY_OFFSET
+#define CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_15_PROLOG
+#define CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_18_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_15_PRIVATE_PROPERTY_OFFSET \
-	CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_15_SPARSE_DATA \
-	CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_15_RPC_WRAPPERS \
-	CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_15_INCLASS \
-	CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_15_STANDARD_CONSTRUCTORS \
+	CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_18_PRIVATE_PROPERTY_OFFSET \
+	CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_18_SPARSE_DATA \
+	CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_18_RPC_WRAPPERS \
+	CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_18_INCLASS \
+	CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_18_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_15_GENERATED_BODY \
+#define CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_18_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_15_PRIVATE_PROPERTY_OFFSET \
-	CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_15_SPARSE_DATA \
-	CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
-	CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_15_INCLASS_NO_PURE_DECLS \
-	CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_15_ENHANCED_CONSTRUCTORS \
+	CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_18_PRIVATE_PROPERTY_OFFSET \
+	CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_18_SPARSE_DATA \
+	CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_18_RPC_WRAPPERS_NO_PURE_DECLS \
+	CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_18_INCLASS_NO_PURE_DECLS \
+	CityBuilding_Source_CityBuilding_UI_MyUserWidget_h_18_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

@@ -3,15 +3,24 @@
 
 #include "CityBuilding/UI/MyUserWidget.h"
 
+#include "CityBuilding/Buildings/BuildingRoad.h"
+#include "CityBuilding/Setup/MyPlayerController.h"
+
 #include "Components/Button.h"
+#include "Kismet/GameplayStatics.h"
 
 
 void UMyUserWidget::NativeConstruct()
 {
+
 }
 
 void UMyUserWidget::NativeOnInitialized()
 {
+	/* Ref PlayerController*/
+	ControllerRef = Cast<AMyPlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
+
+
 	ButtonRoad->OnClicked.AddDynamic(this, &UMyUserWidget::ButtonRoad_Pressed);
 	ButtonRail->OnClicked.AddDynamic(this, &UMyUserWidget::ButtonRail_Pressed);
 	ButtonHouse->OnClicked.AddDynamic(this, &UMyUserWidget::ButtonHouse_Pressed);
@@ -21,43 +30,52 @@ void UMyUserWidget::NativeOnInitialized()
 
 void UMyUserWidget::ButtonRoad_Pressed()
 {
-	ButtonClicked = ButtonRoad;
 	ToggleButtonSelected();
-	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Purple, FString::Printf(TEXT("Road pressed")));
+	
+	//ButtonClicked = ButtonRoad;
+	eBuildingTypeToSpawn = BuildingTypes::Road;
+	ControllerRef->ToggleSpawnBuilding();
 }
 
 void UMyUserWidget::ButtonRail_Pressed()
 {
-	ButtonClicked = ButtonRail;
 	ToggleButtonSelected();
-	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Purple, FString::Printf(TEXT("Rail pressed")));
+	
+	//ButtonClicked = ButtonRail;
+	eBuildingTypeToSpawn = BuildingTypes::Rail;
+	ControllerRef->ToggleSpawnBuilding();
 }
 
 void UMyUserWidget::ButtonHouse_Pressed()
 {
-	ButtonClicked = ButtonHouse;
+	//ButtonClicked = ButtonHouse;
 	ToggleButtonSelected();
-	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Purple, FString::Printf(TEXT("House pressed")));
+
+	eBuildingTypeToSpawn = BuildingTypes::House;
+	ControllerRef->ToggleSpawnBuilding();
 }
 
 void UMyUserWidget::ButtonBuilding_Pressed()
 {
-	ButtonClicked = ButtonBuilding;
+	//ButtonClicked = ButtonBuilding;
 	ToggleButtonSelected();
-	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Purple, FString::Printf(TEXT("Building pressed")));
+
+	eBuildingTypeToSpawn = BuildingTypes::Building;
+	ControllerRef->ToggleSpawnBuilding();
 }
 
 void UMyUserWidget::ButtonWindmill_Pressed()
 {
-	ButtonClicked = ButtonWindmill;
+	//ButtonClicked = ButtonWindmill;
 	ToggleButtonSelected();
-	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Purple, FString::Printf(TEXT("Windmill pressed")));
+
+	eBuildingTypeToSpawn = BuildingTypes::Windmill;
+	ControllerRef->ToggleSpawnBuilding();
 }
+
 
 void UMyUserWidget::ToggleButtonSelected()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Purple, FString::Printf(TEXT("Toggle Button")));
-
 	if (bButtonIsSelected == false)
 	{
 		ButtonClicked->SetBackgroundColor(FLinearColor(0.f, 1.f, 0.f, 1.f));
@@ -70,6 +88,11 @@ void UMyUserWidget::ToggleButtonSelected()
 		{
 			ButtonClicked->SetBackgroundColor(FLinearColor(1.f, 1.f, 1.f, 1.f));
 			bButtonIsSelected = false;
+			if (ControllerRef->bBuildingBeingSpawned == true)
+			{
+				ControllerRef->BuildingSpawned->Destroy();
+				ControllerRef->bBuildingBeingSpawned = false;
+			}
 		}
 		else
 		{

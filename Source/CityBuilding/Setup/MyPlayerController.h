@@ -98,11 +98,10 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = "Widgets")
 		UMyUserWidget* BuildingWidget;
 
+	/* BUILDING TYPES */
+	class ABuildingRoad* BuildingRoadRef;
 	
-	void CallBuildingWidget_ButtonRoad_Pressed();
-	void CallBuildingWidget_ButtonRail_Pressed();
-	void CallBuildingWidget_ButtonHouse_Pressed();
-
+		
 protected:
 	void BeginPlay();
 };

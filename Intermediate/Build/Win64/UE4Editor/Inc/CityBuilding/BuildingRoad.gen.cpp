@@ -18,8 +18,6 @@ void EmptyLinkFunctionForGeneratedCodeBuildingRoad() {}
 	CITYBUILDING_API UClass* Z_Construct_UClass_ABuildings();
 	UPackage* Z_Construct_UPackage__Script_CityBuilding();
 	ENGINE_API UClass* Z_Construct_UClass_UStaticMeshComponent_NoRegister();
-	COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
-	CITYBUILDING_API UClass* Z_Construct_UClass_ABuildings_NoRegister();
 // End Cross Module References
 	void ABuildingRoad::StaticRegisterNativesABuildingRoad()
 	{
@@ -66,10 +64,6 @@ void EmptyLinkFunctionForGeneratedCodeBuildingRoad() {}
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_PathwaySE_MetaData[];
 #endif
 		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_PathwaySE;
-#if WITH_METADATA
-		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_BP_BuildingRoad_MetaData[];
-#endif
-		static const UE4CodeGen_Private::FClassPropertyParams NewProp_BP_BuildingRoad;
 		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UE4CodeGen_Private::FClassParams ClassParams;
@@ -149,13 +143,6 @@ void EmptyLinkFunctionForGeneratedCodeBuildingRoad() {}
 	};
 #endif
 	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABuildingRoad_Statics::NewProp_PathwaySE = { "PathwaySE", nullptr, (EPropertyFlags)0x001000000008000d, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ABuildingRoad, PathwaySE), Z_Construct_UClass_UStaticMeshComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_ABuildingRoad_Statics::NewProp_PathwaySE_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ABuildingRoad_Statics::NewProp_PathwaySE_MetaData)) };
-#if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ABuildingRoad_Statics::NewProp_BP_BuildingRoad_MetaData[] = {
-		{ "Category", "Building|Class" },
-		{ "ModuleRelativePath", "Buildings/BuildingRoad.h" },
-	};
-#endif
-	const UE4CodeGen_Private::FClassPropertyParams Z_Construct_UClass_ABuildingRoad_Statics::NewProp_BP_BuildingRoad = { "BP_BuildingRoad", nullptr, (EPropertyFlags)0x0014000000000001, UE4CodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ABuildingRoad, BP_BuildingRoad), Z_Construct_UClass_ABuildings_NoRegister, Z_Construct_UClass_UClass, METADATA_PARAMS(Z_Construct_UClass_ABuildingRoad_Statics::NewProp_BP_BuildingRoad_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ABuildingRoad_Statics::NewProp_BP_BuildingRoad_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ABuildingRoad_Statics::PropPointers[] = {
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABuildingRoad_Statics::NewProp_PathwayNorth,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABuildingRoad_Statics::NewProp_PathwaySouth,
@@ -165,7 +152,6 @@ void EmptyLinkFunctionForGeneratedCodeBuildingRoad() {}
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABuildingRoad_Statics::NewProp_PathwayNE,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABuildingRoad_Statics::NewProp_PathwaySW,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABuildingRoad_Statics::NewProp_PathwaySE,
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABuildingRoad_Statics::NewProp_BP_BuildingRoad,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_ABuildingRoad_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<ABuildingRoad>::IsAbstract,
@@ -194,7 +180,7 @@ void EmptyLinkFunctionForGeneratedCodeBuildingRoad() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ABuildingRoad, 2073257834);
+	IMPLEMENT_CLASS(ABuildingRoad, 2376178753);
 	template<> CITYBUILDING_API UClass* StaticClass<ABuildingRoad>()
 	{
 		return ABuildingRoad::StaticClass();

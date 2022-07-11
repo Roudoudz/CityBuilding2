@@ -14,6 +14,10 @@ enum class BuildingTypes
 	Zoned   UMETA(DisplayName = "Zoned"),
 	Placed  UMETA(DisplayName = "Placed"),
 	Road    UMETA(DisplayName = "Road"),
+	Rail    UMETA(DisplayName = "Rail"),
+	House    UMETA(DisplayName = "House"),
+	Building    UMETA(DisplayName = "Building"),
+	Windmill    UMETA(DisplayName = "Windmill"),
 };
 
 class ABuildings;

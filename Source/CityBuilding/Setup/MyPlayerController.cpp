@@ -41,7 +41,7 @@ void AMyPlayerController::SetupInputComponent()
 	check(InputComponent); //Protect the input component if not associated
 
 	// Pawn movement
-	InputComponent->BindAction("SpawnBuilding", IE_Pressed, this, &AMyPlayerController::ToggleSpawnBuilding);
+	//InputComponent->BindAction("SpawnBuilding", IE_Pressed, this, &AMyPlayerController::ToggleSpawnBuilding);
 	InputComponent->BindAction("MouseLeftClick", IE_Pressed, this, &AMyPlayerController::CallMouseLeftClick);
 	InputComponent->BindAction("MouseRightClick", IE_Pressed, this, &AMyPlayerController::CallMouseRightClick);
 }
@@ -83,6 +83,13 @@ void AMyPlayerController::BeginPlay()
 		Red("POST PROCESS VOLUME NOT FOUND!");
 	}
 	
+	// Building types references
+	BuildingRoadRef = Cast<ABuildingRoad>(UGameplayStatics::GetActorOfClass(GetWorld(), ABuildingRoad::StaticClass()));
+	if (!BuildingRoadRef)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, FString::Printf(TEXT("NO BuildingRoadRef")));
+	}
+
 	/****   WIDGETS   *****/
 	if (IsValid(BP_BuildingWidgetRef))
 	{
@@ -189,8 +196,51 @@ void AMyPlayerController::SpawnBuilding()
 	bool bSuccessHitBuilding = GetWorld()->LineTraceSingleByChannel(HitResult, TraceStart, TraceEnd, ECC_GameTraceChannel2, QueryParamsBuilding);
 	if (bSuccessHitBuilding)
 	{
-		BuildingSpawned = GetWorld()->SpawnActor<ABuildings>(BuildingsClassRef, HitResult.Location, FRotator(0, 0, 0));
-		BuildingSpawned->Mesh->SetMaterial(0, BuildingSpawned->M_Selected);
+		/* Reference tothe button clicked */
+		//if (BuildingWidget->ButtonClicked == BuildingWidget->ButtonRoad)
+		//{
+		//	if (BuildingManagerRef->BP_BuildingRoad)
+		//	{
+		//		BuildingSpawned = GetWorld()->SpawnActor<ABuildings>(BuildingManagerRef->BP_BuildingRoad, HitResult.Location, FRotator(0, 0, 0));
+		//	}
+		//}
+		/* Reference to the building type from the enum */
+		if (BuildingWidget->eBuildingTypeToSpawn == BuildingTypes::Road)
+		{
+			if (BuildingManagerRef->BP_BuildingRoad)
+			{
+				BuildingSpawned = GetWorld()->SpawnActor<ABuildings>(BuildingManagerRef->BP_BuildingRoad, HitResult.Location, FRotator(0, 0, 0));
+			}
+		}
+		else if (BuildingWidget->eBuildingTypeToSpawn == BuildingTypes::Rail)
+		{
+			if (BuildingManagerRef->BP_BuildingRail)
+			{
+				BuildingSpawned = GetWorld()->SpawnActor<ABuildings>(BuildingManagerRef->BP_BuildingRail, HitResult.Location, FRotator(0, 0, 0));
+			}
+		}
+		else if (BuildingWidget->eBuildingTypeToSpawn == BuildingTypes::House)
+		{
+			if (BuildingManagerRef->BP_BuildingHouse)
+			{
+				BuildingSpawned = GetWorld()->SpawnActor<ABuildings>(BuildingManagerRef->BP_BuildingHouse, HitResult.Location, FRotator(0, 0, 0));
+			}
+		}
+		else if (BuildingWidget->eBuildingTypeToSpawn == BuildingTypes::Building)
+		{
+			if (BuildingManagerRef->BP_BuildingBuilding)
+			{
+				BuildingSpawned = GetWorld()->SpawnActor<ABuildings>(BuildingManagerRef->BP_BuildingBuilding, HitResult.Location, FRotator(0, 0, 0));
+			}
+		}
+		else if (BuildingWidget->eBuildingTypeToSpawn == BuildingTypes::Windmill)
+		{
+			if (BuildingManagerRef->BP_BuildingWindmill)
+			{
+				BuildingSpawned = GetWorld()->SpawnActor<ABuildings>(BuildingManagerRef->BP_BuildingWindmill, HitResult.Location, FRotator(0, 0, 0));
+			}
+		}
+
 
 		bBuildingBeingSpawned = true; // Allows UpdateBuildingPlacement in Tick()
 	}
@@ -369,6 +419,11 @@ void AMyPlayerController::DisableBuildingPhysics()
 	// Building can be spawned again
 	bBuildingIsSpawnable = true;
 
+	if (BuildingWidget->bButtonIsSelected == true)
+	{
+		SpawnBuilding();
+	}
+
 }
 
 // Particle emitter - dust when building is spawned
@@ -379,28 +434,6 @@ void AMyPlayerController::CallSpawnDirtParticle()
 	// ALT#2
 	FVector DirtLocation = GridManagerRef->ClosestPosition + FVector(0.f, 0.f, 40.f);
 	BuildingSpawned->SpawnDirtParticle(DirtLocation);
-}
-
-
-////////////////////////////////////////////
-////////////    WIDGET     /////////////////
-////////////////////////////////////////////
-
-
-void AMyPlayerController::CallBuildingWidget_ButtonRoad_Pressed()
-{
-	Red("PRESSED")
-	BuildingWidget->ButtonRoad_Pressed();
-}
-
-void AMyPlayerController::CallBuildingWidget_ButtonRail_Pressed()
-{
-	BuildingWidget->ButtonRail_Pressed();
-}
-
-void AMyPlayerController::CallBuildingWidget_ButtonHouse_Pressed()
-{
-	BuildingWidget->ButtonHouse_Pressed();
 }
 
 

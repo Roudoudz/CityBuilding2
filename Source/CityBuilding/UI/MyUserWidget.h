@@ -4,6 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+
+#include "CityBuilding/Grid/ActorGridCell.h"
+
 #include "MyUserWidget.generated.h"
 
 /**
@@ -15,6 +18,9 @@ class CITYBUILDING_API UMyUserWidget : public UUserWidget
 	GENERATED_BODY()
 
 public:
+	/* REFERENCES */
+	class AMyPlayerController* ControllerRef;
+
 	/* PROPERTIES */
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 		class UButton* ButtonRoad;
@@ -44,6 +50,12 @@ public:
 		void ButtonWindmill_Pressed();
 
 	void ToggleButtonSelected();
+
+	/* BUILDING TYPES */
+	// Building type from enum BuildingTypes
+	UPROPERTY()
+		TEnumAsByte<BuildingTypes> eBuildingTypeToSpawn;
+	
 
 protected:
 	virtual void NativeConstruct() override;

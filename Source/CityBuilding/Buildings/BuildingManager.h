@@ -71,6 +71,19 @@ public:
 	void AdjustRoadWalkways(AActorGridCell* ClosestGridCell, ABuildings* BuildingSpawned);
 
 
+	/* ACTORS TO SPAWN*/
+	UPROPERTY(EditAnywhere, Category = "Building|Class")
+		TSubclassOf<class ABuildings> BP_BuildingRoad;
+	UPROPERTY(EditAnywhere, Category = "Building|Class")
+		TSubclassOf<class ABuildings> BP_BuildingRail;
+	UPROPERTY(EditAnywhere, Category = "Building|Class")
+		TSubclassOf<class ABuildings> BP_BuildingHouse;
+	UPROPERTY(EditAnywhere, Category = "Building|Class")
+		TSubclassOf<class ABuildings> BP_BuildingBuilding;
+	UPROPERTY(EditAnywhere, Category = "Building|Class")
+		TSubclassOf<class ABuildings> BP_BuildingWindmill;
+
+
 	/* DEBUG */
 	FString OccupyingTypeNorth = TEXT("Default");
 	FString OccupyingTypeSouth = TEXT("Default");

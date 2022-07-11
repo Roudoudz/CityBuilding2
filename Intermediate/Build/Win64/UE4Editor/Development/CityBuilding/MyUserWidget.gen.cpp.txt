@@ -101,4 +101,6 @@ E:\Program Files (x86)\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Pro
 E:\Program Files (x86)\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\DynamicPropertyPath.generated.h
 E:\Program Files (x86)\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\WidgetBlueprintGeneratedClass.generated.h
 E:\Program Files (x86)\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\UserWidget.generated.h
+E:\UE4 PROJECTS\City Building\CityBuilding\Source\CityBuilding/Grid/ActorGridCell.h
+E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Inc\CityBuilding\ActorGridCell.generated.h
 E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Inc\CityBuilding\MyUserWidget.generated.h

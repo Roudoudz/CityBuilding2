@@ -23,6 +23,7 @@ void EmptyLinkFunctionForGeneratedCodeBuildingManager() {}
 	CITYBUILDING_API UClass* Z_Construct_UClass_ABuildingManager();
 	ENGINE_API UClass* Z_Construct_UClass_AActor();
 	ENGINE_API UClass* Z_Construct_UClass_UDataTable_NoRegister();
+	COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 // End Cross Module References
 
 static_assert(std::is_polymorphic<FBuildingManagerStruct>() == std::is_polymorphic<FTableRowBase>(), "USTRUCT FBuildingManagerStruct cannot be polymorphic unless super FTableRowBase is polymorphic");
@@ -223,6 +224,26 @@ static struct FScriptStruct_CityBuilding_StaticRegisterNativesFBuildingManagerSt
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_BuildingManagerDT_MetaData[];
 #endif
 		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_BuildingManagerDT;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_BP_BuildingRoad_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FClassPropertyParams NewProp_BP_BuildingRoad;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_BP_BuildingRail_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FClassPropertyParams NewProp_BP_BuildingRail;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_BP_BuildingHouse_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FClassPropertyParams NewProp_BP_BuildingHouse;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_BP_BuildingBuilding_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FClassPropertyParams NewProp_BP_BuildingBuilding;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_BP_BuildingWindmill_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FClassPropertyParams NewProp_BP_BuildingWindmill;
 		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UE4CodeGen_Private::FClassParams ClassParams;
@@ -246,8 +267,50 @@ static struct FScriptStruct_CityBuilding_StaticRegisterNativesFBuildingManagerSt
 	};
 #endif
 	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABuildingManager_Statics::NewProp_BuildingManagerDT = { "BuildingManagerDT", nullptr, (EPropertyFlags)0x0010000000020015, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ABuildingManager, BuildingManagerDT), Z_Construct_UClass_UDataTable_NoRegister, METADATA_PARAMS(Z_Construct_UClass_ABuildingManager_Statics::NewProp_BuildingManagerDT_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ABuildingManager_Statics::NewProp_BuildingManagerDT_MetaData)) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ABuildingManager_Statics::NewProp_BP_BuildingRoad_MetaData[] = {
+		{ "Category", "Building|Class" },
+		{ "Comment", "/* ACTORS TO SPAWN*/" },
+		{ "ModuleRelativePath", "Buildings/BuildingManager.h" },
+		{ "ToolTip", "ACTORS TO SPAWN" },
+	};
+#endif
+	const UE4CodeGen_Private::FClassPropertyParams Z_Construct_UClass_ABuildingManager_Statics::NewProp_BP_BuildingRoad = { "BP_BuildingRoad", nullptr, (EPropertyFlags)0x0014000000000001, UE4CodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ABuildingManager, BP_BuildingRoad), Z_Construct_UClass_ABuildings_NoRegister, Z_Construct_UClass_UClass, METADATA_PARAMS(Z_Construct_UClass_ABuildingManager_Statics::NewProp_BP_BuildingRoad_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ABuildingManager_Statics::NewProp_BP_BuildingRoad_MetaData)) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ABuildingManager_Statics::NewProp_BP_BuildingRail_MetaData[] = {
+		{ "Category", "Building|Class" },
+		{ "ModuleRelativePath", "Buildings/BuildingManager.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FClassPropertyParams Z_Construct_UClass_ABuildingManager_Statics::NewProp_BP_BuildingRail = { "BP_BuildingRail", nullptr, (EPropertyFlags)0x0014000000000001, UE4CodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ABuildingManager, BP_BuildingRail), Z_Construct_UClass_ABuildings_NoRegister, Z_Construct_UClass_UClass, METADATA_PARAMS(Z_Construct_UClass_ABuildingManager_Statics::NewProp_BP_BuildingRail_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ABuildingManager_Statics::NewProp_BP_BuildingRail_MetaData)) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ABuildingManager_Statics::NewProp_BP_BuildingHouse_MetaData[] = {
+		{ "Category", "Building|Class" },
+		{ "ModuleRelativePath", "Buildings/BuildingManager.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FClassPropertyParams Z_Construct_UClass_ABuildingManager_Statics::NewProp_BP_BuildingHouse = { "BP_BuildingHouse", nullptr, (EPropertyFlags)0x0014000000000001, UE4CodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ABuildingManager, BP_BuildingHouse), Z_Construct_UClass_ABuildings_NoRegister, Z_Construct_UClass_UClass, METADATA_PARAMS(Z_Construct_UClass_ABuildingManager_Statics::NewProp_BP_BuildingHouse_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ABuildingManager_Statics::NewProp_BP_BuildingHouse_MetaData)) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ABuildingManager_Statics::NewProp_BP_BuildingBuilding_MetaData[] = {
+		{ "Category", "Building|Class" },
+		{ "ModuleRelativePath", "Buildings/BuildingManager.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FClassPropertyParams Z_Construct_UClass_ABuildingManager_Statics::NewProp_BP_BuildingBuilding = { "BP_BuildingBuilding", nullptr, (EPropertyFlags)0x0014000000000001, UE4CodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ABuildingManager, BP_BuildingBuilding), Z_Construct_UClass_ABuildings_NoRegister, Z_Construct_UClass_UClass, METADATA_PARAMS(Z_Construct_UClass_ABuildingManager_Statics::NewProp_BP_BuildingBuilding_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ABuildingManager_Statics::NewProp_BP_BuildingBuilding_MetaData)) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ABuildingManager_Statics::NewProp_BP_BuildingWindmill_MetaData[] = {
+		{ "Category", "Building|Class" },
+		{ "ModuleRelativePath", "Buildings/BuildingManager.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FClassPropertyParams Z_Construct_UClass_ABuildingManager_Statics::NewProp_BP_BuildingWindmill = { "BP_BuildingWindmill", nullptr, (EPropertyFlags)0x0014000000000001, UE4CodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ABuildingManager, BP_BuildingWindmill), Z_Construct_UClass_ABuildings_NoRegister, Z_Construct_UClass_UClass, METADATA_PARAMS(Z_Construct_UClass_ABuildingManager_Statics::NewProp_BP_BuildingWindmill_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ABuildingManager_Statics::NewProp_BP_BuildingWindmill_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ABuildingManager_Statics::PropPointers[] = {
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABuildingManager_Statics::NewProp_BuildingManagerDT,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABuildingManager_Statics::NewProp_BP_BuildingRoad,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABuildingManager_Statics::NewProp_BP_BuildingRail,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABuildingManager_Statics::NewProp_BP_BuildingHouse,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABuildingManager_Statics::NewProp_BP_BuildingBuilding,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABuildingManager_Statics::NewProp_BP_BuildingWindmill,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_ABuildingManager_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<ABuildingManager>::IsAbstract,
@@ -276,7 +339,7 @@ static struct FScriptStruct_CityBuilding_StaticRegisterNativesFBuildingManagerSt
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ABuildingManager, 3968304604);
+	IMPLEMENT_CLASS(ABuildingManager, 2260634528);
 	template<> CITYBUILDING_API UClass* StaticClass<ABuildingManager>()
 	{
 		return ABuildingManager::StaticClass();

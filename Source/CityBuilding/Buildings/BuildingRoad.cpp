@@ -65,6 +65,9 @@ void ABuildingRoad::BeginPlay()
 {
 	Super::BeginPlay();
 
+
+
+	// Used to define the type of building in ActorGridCell
 	eBuildingType = BuildingTypes::Road;
 }
 

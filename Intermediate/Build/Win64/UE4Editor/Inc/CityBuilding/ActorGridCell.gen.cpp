@@ -36,7 +36,7 @@ void EmptyLinkFunctionForGeneratedCodeActorGridCell() {}
 		return BuildingTypes_StaticEnum();
 	}
 	static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_BuildingTypes(BuildingTypes_StaticEnum, TEXT("/Script/CityBuilding"), TEXT("BuildingTypes"), false, nullptr, nullptr);
-	uint32 Get_Z_Construct_UEnum_CityBuilding_BuildingTypes_Hash() { return 567338755U; }
+	uint32 Get_Z_Construct_UEnum_CityBuilding_BuildingTypes_Hash() { return 2066268959U; }
 	UEnum* Z_Construct_UEnum_CityBuilding_BuildingTypes()
 	{
 #if WITH_HOT_RELOAD
@@ -52,18 +52,30 @@ void EmptyLinkFunctionForGeneratedCodeActorGridCell() {}
 				{ "BuildingTypes::Zoned", (int64)BuildingTypes::Zoned },
 				{ "BuildingTypes::Placed", (int64)BuildingTypes::Placed },
 				{ "BuildingTypes::Road", (int64)BuildingTypes::Road },
+				{ "BuildingTypes::Rail", (int64)BuildingTypes::Rail },
+				{ "BuildingTypes::House", (int64)BuildingTypes::House },
+				{ "BuildingTypes::Building", (int64)BuildingTypes::Building },
+				{ "BuildingTypes::Windmill", (int64)BuildingTypes::Windmill },
 			};
 #if WITH_METADATA
 			const UE4CodeGen_Private::FMetaDataPairParam Enum_MetaDataParams[] = {
+				{ "Building.DisplayName", "Building" },
+				{ "Building.Name", "BuildingTypes::Building" },
 				{ "Comment", "// Stores the tye of building this cell can be occupied by\n" },
+				{ "House.DisplayName", "House" },
+				{ "House.Name", "BuildingTypes::House" },
 				{ "ModuleRelativePath", "Grid/ActorGridCell.h" },
 				{ "None.DisplayName", "None" },
 				{ "None.Name", "BuildingTypes::None" },
 				{ "Placed.DisplayName", "Placed" },
 				{ "Placed.Name", "BuildingTypes::Placed" },
+				{ "Rail.DisplayName", "Rail" },
+				{ "Rail.Name", "BuildingTypes::Rail" },
 				{ "Road.DisplayName", "Road" },
 				{ "Road.Name", "BuildingTypes::Road" },
 				{ "ToolTip", "Stores the tye of building this cell can be occupied by" },
+				{ "Windmill.DisplayName", "Windmill" },
+				{ "Windmill.Name", "BuildingTypes::Windmill" },
 				{ "Zoned.DisplayName", "Zoned" },
 				{ "Zoned.Name", "BuildingTypes::Zoned" },
 			};

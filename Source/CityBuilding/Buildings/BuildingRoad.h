@@ -37,8 +37,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		class UStaticMeshComponent* PathwaySE;
 
-	UPROPERTY(EditAnywhere, Category = "Building|Class")
-		TSubclassOf<ABuildings> BP_BuildingRoad;
+	//UPROPERTY(EditAnywhere, Category = "Building|Class")
+	//	TSubclassOf<ABuildingRoad> BP_BuildingRoad;
 	
 protected:
 	// Called when the game starts or when spawned

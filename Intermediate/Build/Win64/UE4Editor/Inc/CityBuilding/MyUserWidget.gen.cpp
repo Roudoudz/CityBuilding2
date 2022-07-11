@@ -18,6 +18,7 @@ void EmptyLinkFunctionForGeneratedCodeMyUserWidget() {}
 	UMG_API UClass* Z_Construct_UClass_UUserWidget();
 	UPackage* Z_Construct_UPackage__Script_CityBuilding();
 	UMG_API UClass* Z_Construct_UClass_UButton_NoRegister();
+	CITYBUILDING_API UEnum* Z_Construct_UEnum_CityBuilding_BuildingTypes();
 // End Cross Module References
 	DEFINE_FUNCTION(UMyUserWidget::execButtonWindmill_Pressed)
 	{
@@ -207,6 +208,11 @@ void EmptyLinkFunctionForGeneratedCodeMyUserWidget() {}
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_ButtonWindmill_MetaData[];
 #endif
 		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_ButtonWindmill;
+		static const UE4CodeGen_Private::FUnsizedIntPropertyParams NewProp_eBuildingTypeToSpawn_Underlying;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_eBuildingTypeToSpawn_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FEnumPropertyParams NewProp_eBuildingTypeToSpawn;
 		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UE4CodeGen_Private::FClassParams ClassParams;
@@ -276,12 +282,23 @@ void EmptyLinkFunctionForGeneratedCodeMyUserWidget() {}
 	};
 #endif
 	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UMyUserWidget_Statics::NewProp_ButtonWindmill = { "ButtonWindmill", nullptr, (EPropertyFlags)0x001000000008000c, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UMyUserWidget, ButtonWindmill), Z_Construct_UClass_UButton_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UMyUserWidget_Statics::NewProp_ButtonWindmill_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UMyUserWidget_Statics::NewProp_ButtonWindmill_MetaData)) };
+	const UE4CodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UClass_UMyUserWidget_Statics::NewProp_eBuildingTypeToSpawn_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UE4CodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, METADATA_PARAMS(nullptr, 0) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UMyUserWidget_Statics::NewProp_eBuildingTypeToSpawn_MetaData[] = {
+		{ "Comment", "/* BUILDING TYPES */// Building type from enum BuildingTypes\n" },
+		{ "ModuleRelativePath", "UI/MyUserWidget.h" },
+		{ "ToolTip", "BUILDING TYPES // Building type from enum BuildingTypes" },
+	};
+#endif
+	const UE4CodeGen_Private::FEnumPropertyParams Z_Construct_UClass_UMyUserWidget_Statics::NewProp_eBuildingTypeToSpawn = { "eBuildingTypeToSpawn", nullptr, (EPropertyFlags)0x0010000000000000, UE4CodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UMyUserWidget, eBuildingTypeToSpawn), Z_Construct_UEnum_CityBuilding_BuildingTypes, METADATA_PARAMS(Z_Construct_UClass_UMyUserWidget_Statics::NewProp_eBuildingTypeToSpawn_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UMyUserWidget_Statics::NewProp_eBuildingTypeToSpawn_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UMyUserWidget_Statics::PropPointers[] = {
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyUserWidget_Statics::NewProp_ButtonRoad,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyUserWidget_Statics::NewProp_ButtonRail,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyUserWidget_Statics::NewProp_ButtonHouse,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyUserWidget_Statics::NewProp_ButtonBuilding,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyUserWidget_Statics::NewProp_ButtonWindmill,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyUserWidget_Statics::NewProp_eBuildingTypeToSpawn_Underlying,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyUserWidget_Statics::NewProp_eBuildingTypeToSpawn,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_UMyUserWidget_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<UMyUserWidget>::IsAbstract,
@@ -310,7 +327,7 @@ void EmptyLinkFunctionForGeneratedCodeMyUserWidget() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(UMyUserWidget, 32881162);
+	IMPLEMENT_CLASS(UMyUserWidget, 1403586108);
 	template<> CITYBUILDING_API UClass* StaticClass<UMyUserWidget>()
 	{
 		return UMyUserWidget::StaticClass();
