@@ -24,7 +24,6 @@ ABuildingManager::ABuildingManager()
 	{
 		GEngine->AddOnScreenDebugMessage(-1, .0f, FColor::Red, FString::Printf(TEXT("NO BUILDING MANAGER DATA TABLE FOUND!")));
 	}
-
 }
 
 
@@ -71,7 +70,7 @@ void ABuildingManager::CheckIfBuildingIsPlaceable(AActorGridCell* ClosestGridCel
 	}
 }
 
-
+// Check the adjacent grid cells to know if the road is placeable
 void ABuildingManager::CheckAdjacentRoads(AActorGridCell* ClosestGridCell, ABuildings* BuildingSpawned)
 {
 	/* DEBUG (called in PLayerController) */
@@ -130,6 +129,7 @@ void ABuildingManager::AdjustRoadWalkways(AActorGridCell* ClosestGridCell, ABuil
 		{
 			NorthNeighbourRoad->PathwaySouth->SetVisibility(false);
 		}
+
 	}
 	// SOUTH
 	if (ClosestGridCell->OccupyingType == BuildingTypes::Road &&
@@ -153,11 +153,16 @@ void ABuildingManager::AdjustRoadWalkways(AActorGridCell* ClosestGridCell, ABuil
 		ABuildingRoad* RoadSpawned = Cast<ABuildingRoad>(BuildingSpawned);
 		RoadSpawned->PathwayWest->SetVisibility(false);
 		// Hide east pathway of the nort western road
-		ABuildingRoad* SouthNeighbourRoad = Cast<ABuildingRoad>(ClosestGridCell->NeighbourWest->OccupyingActor);
-		if (SouthNeighbourRoad)
+		ABuildingRoad* WestNeighbourRoad = Cast<ABuildingRoad>(ClosestGridCell->NeighbourWest->OccupyingActor);
+		if (WestNeighbourRoad)
 		{
-			SouthNeighbourRoad->PathwayEast->SetVisibility(false);
+			WestNeighbourRoad->PathwayEast->SetVisibility(false);
+			WestNeighbourRoad->RoadlineHalfLeft->SetVisibility(true);
 		}
+				 
+		// Adjust roadlines
+		RoadSpawned->Roadline->SetRelativeRotation(FRotator(0, 0, 0));
+
 	}
 	// EAST
 	if (ClosestGridCell->OccupyingType == BuildingTypes::Road &&
@@ -167,11 +172,15 @@ void ABuildingManager::AdjustRoadWalkways(AActorGridCell* ClosestGridCell, ABuil
 		ABuildingRoad* RoadSpawned = Cast<ABuildingRoad>(BuildingSpawned);
 		RoadSpawned->PathwayEast->SetVisibility(false);
 		// Hide west pathway of the eastern neighbouring road
-		ABuildingRoad* SouthNeighbourRoad = Cast<ABuildingRoad>(ClosestGridCell->NeighbourEast->OccupyingActor);
-		if (SouthNeighbourRoad)
+		ABuildingRoad* EastNeighbourRoad = Cast<ABuildingRoad>(ClosestGridCell->NeighbourEast->OccupyingActor);
+		if (EastNeighbourRoad)
 		{
-			SouthNeighbourRoad->PathwayWest->SetVisibility(false);
+			EastNeighbourRoad->PathwayWest->SetVisibility(false);
+			EastNeighbourRoad->RoadlineHalfRight->SetVisibility(true);
 		}
+		// Adjust roadlines
+		RoadSpawned->Roadline->SetRelativeRotation(FRotator(0, 0, 0));
+		
 	}
 }
 

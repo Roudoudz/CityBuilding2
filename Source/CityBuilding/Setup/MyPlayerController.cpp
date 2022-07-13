@@ -41,7 +41,7 @@ void AMyPlayerController::SetupInputComponent()
 	check(InputComponent); //Protect the input component if not associated
 
 	// Pawn movement
-	//InputComponent->BindAction("SpawnBuilding", IE_Pressed, this, &AMyPlayerController::ToggleSpawnBuilding);
+	InputComponent->BindAction("SpawnBuilding", IE_Pressed, this, &AMyPlayerController::ToggleSpawnBuilding);
 	InputComponent->BindAction("MouseLeftClick", IE_Pressed, this, &AMyPlayerController::CallMouseLeftClick);
 	InputComponent->BindAction("MouseRightClick", IE_Pressed, this, &AMyPlayerController::CallMouseRightClick);
 }
@@ -152,6 +152,7 @@ void AMyPlayerController::CallMouseRightClick()
 	{
 		BuildingSpawned->Destroy();
 		bBuildingBeingSpawned = false;
+		bBuildingIsSpawnable = true;
 	}
 	// If some buildings are selected, unselect all of them
 	else if (ArrayBuildingSelected.Num() > 0)
@@ -240,7 +241,6 @@ void AMyPlayerController::SpawnBuilding()
 				BuildingSpawned = GetWorld()->SpawnActor<ABuildings>(BuildingManagerRef->BP_BuildingWindmill, HitResult.Location, FRotator(0, 0, 0));
 			}
 		}
-
 
 		bBuildingBeingSpawned = true; // Allows UpdateBuildingPlacement in Tick()
 	}
@@ -388,7 +388,7 @@ void AMyPlayerController::PlaceBuildingInWorld_TGDC()
 		BuildingSpawned->Mesh->SetMaterial(0, BuildingSpawned->M_Default);
 
 		// Change pathways depending on neighbouring roads
-		CallAdjustRoadWalkways(ClosestGridCellLocal);
+		CallAdjustRoadWalkways(ClosestGridCellLocal); // see below
 		
 
 		// Call particle emitter in ABuildings

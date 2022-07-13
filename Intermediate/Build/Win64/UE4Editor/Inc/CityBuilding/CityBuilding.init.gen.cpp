@@ -21,7 +21,7 @@ void EmptyLinkFunctionForGeneratedCodeCityBuilding_init() {}
 				nullptr,
 				0,
 				PKG_CompiledIn | 0x00000000,
-				0x0D778F3B,
+				0x229CCA75,
 				0xC9939A30,
 				METADATA_PARAMS(nullptr, 0)
 			};

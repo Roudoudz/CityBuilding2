@@ -20,7 +20,6 @@ void UMyUserWidget::NativeOnInitialized()
 	/* Ref PlayerController*/
 	ControllerRef = Cast<AMyPlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
 
-
 	ButtonRoad->OnClicked.AddDynamic(this, &UMyUserWidget::ButtonRoad_Pressed);
 	ButtonRail->OnClicked.AddDynamic(this, &UMyUserWidget::ButtonRail_Pressed);
 	ButtonHouse->OnClicked.AddDynamic(this, &UMyUserWidget::ButtonHouse_Pressed);
@@ -30,25 +29,25 @@ void UMyUserWidget::NativeOnInitialized()
 
 void UMyUserWidget::ButtonRoad_Pressed()
 {
+	ButtonClicked = ButtonRoad; //needs to be before ToggleButtonSelected()
 	ToggleButtonSelected();
 	
-	//ButtonClicked = ButtonRoad;
 	eBuildingTypeToSpawn = BuildingTypes::Road;
 	ControllerRef->ToggleSpawnBuilding();
 }
 
 void UMyUserWidget::ButtonRail_Pressed()
 {
+	ButtonClicked = ButtonRail; //needs to be before ToggleButtonSelected()
 	ToggleButtonSelected();
 	
-	//ButtonClicked = ButtonRail;
 	eBuildingTypeToSpawn = BuildingTypes::Rail;
 	ControllerRef->ToggleSpawnBuilding();
 }
 
 void UMyUserWidget::ButtonHouse_Pressed()
 {
-	//ButtonClicked = ButtonHouse;
+	ButtonClicked = ButtonHouse; //needs to be before ToggleButtonSelected()
 	ToggleButtonSelected();
 
 	eBuildingTypeToSpawn = BuildingTypes::House;
@@ -57,7 +56,7 @@ void UMyUserWidget::ButtonHouse_Pressed()
 
 void UMyUserWidget::ButtonBuilding_Pressed()
 {
-	//ButtonClicked = ButtonBuilding;
+	ButtonClicked = ButtonBuilding; //needs to be before ToggleButtonSelected()
 	ToggleButtonSelected();
 
 	eBuildingTypeToSpawn = BuildingTypes::Building;
@@ -66,7 +65,7 @@ void UMyUserWidget::ButtonBuilding_Pressed()
 
 void UMyUserWidget::ButtonWindmill_Pressed()
 {
-	//ButtonClicked = ButtonWindmill;
+	ButtonClicked = ButtonWindmill; //needs to be before ToggleButtonSelected()
 	ToggleButtonSelected();
 
 	eBuildingTypeToSpawn = BuildingTypes::Windmill;
@@ -92,6 +91,7 @@ void UMyUserWidget::ToggleButtonSelected()
 			{
 				ControllerRef->BuildingSpawned->Destroy();
 				ControllerRef->bBuildingBeingSpawned = false;
+				ControllerRef->bBuildingIsSpawnable = true;
 			}
 		}
 		else

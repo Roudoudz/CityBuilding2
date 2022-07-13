@@ -8,9 +8,9 @@
 
 #include "BuildingRoad.generated.h"
 
-/**
- * 
- */
+class UStaticMeshComponent;
+ 
+
 UCLASS()
 class CITYBUILDING_API ABuildingRoad : public ABuildings
 {
@@ -20,26 +20,35 @@ class CITYBUILDING_API ABuildingRoad : public ABuildings
 public:
 	ABuildingRoad();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		class UStaticMeshComponent* PathwayNorth;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		class UStaticMeshComponent* PathwaySouth;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		class UStaticMeshComponent* PathwayWest;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		class UStaticMeshComponent* PathwayEast;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		class UStaticMeshComponent* PathwayNW;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		class UStaticMeshComponent* PathwayNE;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		class UStaticMeshComponent* PathwaySW;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		class UStaticMeshComponent* PathwaySE;
+	UPROPERTY(EditDefaultsOnly, Category = "MeshSetup")
+	FVector ScalePathway;
+	UPROPERTY(EditDefaultsOnly, Category = "MeshSetup")
+	float PathwayLocZ;
 
-	//UPROPERTY(EditAnywhere, Category = "Building|Class")
-	//	TSubclassOf<ABuildingRoad> BP_BuildingRoad;
-	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UStaticMeshComponent* PathwayNorth;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UStaticMeshComponent* PathwaySouth;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UStaticMeshComponent* PathwayWest;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UStaticMeshComponent* PathwayEast;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UStaticMeshComponent* PathwayNW;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UStaticMeshComponent* PathwayNE;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UStaticMeshComponent* PathwaySW;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UStaticMeshComponent* PathwaySE;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UStaticMeshComponent* Roadline;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UStaticMeshComponent* RoadlineHalfRight;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UStaticMeshComponent* RoadlineHalfLeft;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
