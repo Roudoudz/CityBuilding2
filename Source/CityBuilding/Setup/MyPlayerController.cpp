@@ -41,7 +41,7 @@ void AMyPlayerController::SetupInputComponent()
 	check(InputComponent); //Protect the input component if not associated
 
 	// Pawn movement
-	InputComponent->BindAction("SpawnBuilding", IE_Pressed, this, &AMyPlayerController::ToggleSpawnBuilding);
+	//InputComponent->BindAction("SpawnBuilding", IE_Pressed, this, &AMyPlayerController::ToggleSpawnBuilding);
 	InputComponent->BindAction("MouseLeftClick", IE_Pressed, this, &AMyPlayerController::CallMouseLeftClick);
 	InputComponent->BindAction("MouseRightClick", IE_Pressed, this, &AMyPlayerController::CallMouseRightClick);
 }
@@ -123,6 +123,8 @@ void AMyPlayerController::Tick(float DeltaTime)
 	GEngine->AddOnScreenDebugMessage(-1, 0.f, FColor::Green, FString::Printf(TEXT("North: %s, South: %s, East: %s, West: %s"), 
 		*BuildingManagerRef->OccupyingTypeNorth, *BuildingManagerRef->OccupyingTypeSouth,
 		*BuildingManagerRef->OccupyingTypeEast, *BuildingManagerRef->OccupyingTypeWest));
+	GEngine->AddOnScreenDebugMessage(-1, 0.f, FColor::Orange, FString::Printf(TEXT("bBuildingIsSpawnable: %s"),
+		bBuildingIsSpawnable ? TEXT("true") : TEXT("false")));
 
 
 	/***** LOGIC ******/
@@ -153,6 +155,9 @@ void AMyPlayerController::CallMouseRightClick()
 		BuildingSpawned->Destroy();
 		bBuildingBeingSpawned = false;
 		bBuildingIsSpawnable = true;
+
+		// Unselect the widget button
+		BuildingWidget->ToggleButtonSelected();
 	}
 	// If some buildings are selected, unselect all of them
 	else if (ArrayBuildingSelected.Num() > 0)

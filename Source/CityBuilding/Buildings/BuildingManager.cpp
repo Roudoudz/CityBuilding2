@@ -39,7 +39,6 @@ void ABuildingManager::BeginPlay()
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, FString::Printf(TEXT("BUILDING CLASS(ES) REFERENCE(S) MISSING IN BUILDING MANAGER!")));
 	}
-
 }
 
 
@@ -180,7 +179,6 @@ void ABuildingManager::AdjustRoadWalkways(AActorGridCell* ClosestGridCell, ABuil
 		}
 		// Adjust roadlines
 		RoadSpawned->Roadline->SetRelativeRotation(FRotator(0, 0, 0));
-		
 	}
 }
 

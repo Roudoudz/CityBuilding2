@@ -29,47 +29,113 @@ void UMyUserWidget::NativeOnInitialized()
 
 void UMyUserWidget::ButtonRoad_Pressed()
 {
-	ButtonClicked = ButtonRoad; //needs to be before ToggleButtonSelected()
-	ToggleButtonSelected();
-	
-	eBuildingTypeToSpawn = BuildingTypes::Road;
-	ControllerRef->ToggleSpawnBuilding();
+	if (ControllerRef->bBuildingBeingSpawned == true)
+	{
+		ControllerRef->BuildingSpawned->Destroy();
+
+		ButtonClicked = ButtonRoad; //needs to be before ToggleButtonSelected()
+		ToggleButtonSelected();
+
+		// If the building spawned was road, then do not spawn it again...
+		if (ButtonSelected == ButtonClicked)
+		{
+			ControllerRef->bBuildingBeingSpawned = false;
+			ControllerRef->bBuildingIsSpawnable = true;
+		}
+		//... else spawn the raod
+		else
+		{
+			ButtonClicked = ButtonRoad; //needs to be before ToggleButtonSelected()
+			ToggleButtonSelected();
+
+			eBuildingTypeToSpawn = BuildingTypes::Road;
+			ControllerRef->ToggleSpawnBuilding();
+		}
+	}
+	else if (ControllerRef->bBuildingBeingSpawned == false)
+	{
+		ButtonClicked = ButtonRoad; //needs to be before ToggleButtonSelected()
+		ToggleButtonSelected();
+
+		eBuildingTypeToSpawn = BuildingTypes::Road;
+		ControllerRef->ToggleSpawnBuilding();
+	}
 }
 
 void UMyUserWidget::ButtonRail_Pressed()
 {
-	ButtonClicked = ButtonRail; //needs to be before ToggleButtonSelected()
-	ToggleButtonSelected();
-	
-	eBuildingTypeToSpawn = BuildingTypes::Rail;
-	ControllerRef->ToggleSpawnBuilding();
+	if (ControllerRef->bBuildingBeingSpawned == true)
+	{
+		ControllerRef->BuildingSpawned->Destroy();
+
+		ButtonClicked = ButtonRail; //needs to be before ToggleButtonSelected()
+		ToggleButtonSelected();
+
+		eBuildingTypeToSpawn = BuildingTypes::Rail;
+		ControllerRef->ToggleSpawnBuilding();
+	}
+	else
+	{
+		ButtonClicked = ButtonRail; //needs to be before ToggleButtonSelected()
+		ToggleButtonSelected();
+
+		eBuildingTypeToSpawn = BuildingTypes::Rail;
+		ControllerRef->ToggleSpawnBuilding();
+	}
 }
 
 void UMyUserWidget::ButtonHouse_Pressed()
 {
-	ButtonClicked = ButtonHouse; //needs to be before ToggleButtonSelected()
-	ToggleButtonSelected();
+	if (ControllerRef->bBuildingBeingSpawned == true)
+	{
+		ControllerRef->BuildingSpawned->Destroy();
+		ControllerRef->bBuildingBeingSpawned = false;
+		ControllerRef->bBuildingIsSpawnable = true;
+	}
+	else if (ControllerRef->bBuildingBeingSpawned == false)
+	{
+		ButtonClicked = ButtonHouse; //needs to be before ToggleButtonSelected()
+		ToggleButtonSelected();
 
-	eBuildingTypeToSpawn = BuildingTypes::House;
-	ControllerRef->ToggleSpawnBuilding();
+		eBuildingTypeToSpawn = BuildingTypes::House;
+		ControllerRef->ToggleSpawnBuilding();
+	}
 }
 
 void UMyUserWidget::ButtonBuilding_Pressed()
 {
-	ButtonClicked = ButtonBuilding; //needs to be before ToggleButtonSelected()
-	ToggleButtonSelected();
+	if (ControllerRef->bBuildingBeingSpawned == true)
+	{
+		ControllerRef->BuildingSpawned->Destroy();
+		ControllerRef->bBuildingBeingSpawned = false;
+		ControllerRef->bBuildingIsSpawnable = true;
+	}
+	else if (ControllerRef->bBuildingBeingSpawned == false)
+	{
+		ButtonClicked = ButtonBuilding; //needs to be before ToggleButtonSelected()
+		ToggleButtonSelected();
 
-	eBuildingTypeToSpawn = BuildingTypes::Building;
-	ControllerRef->ToggleSpawnBuilding();
+		eBuildingTypeToSpawn = BuildingTypes::Building;
+		ControllerRef->ToggleSpawnBuilding();
+	}
 }
 
 void UMyUserWidget::ButtonWindmill_Pressed()
 {
-	ButtonClicked = ButtonWindmill; //needs to be before ToggleButtonSelected()
-	ToggleButtonSelected();
+	if (ControllerRef->bBuildingBeingSpawned == true)
+	{
+		ControllerRef->BuildingSpawned->Destroy();
+		ControllerRef->bBuildingBeingSpawned = false;
+		ControllerRef->bBuildingIsSpawnable = true;
+	}
+	else if (ControllerRef->bBuildingBeingSpawned == false)
+	{
+		ButtonClicked = ButtonWindmill; //needs to be before ToggleButtonSelected()
+		ToggleButtonSelected();
 
-	eBuildingTypeToSpawn = BuildingTypes::Windmill;
-	ControllerRef->ToggleSpawnBuilding();
+		eBuildingTypeToSpawn = BuildingTypes::Windmill;
+		ControllerRef->ToggleSpawnBuilding();
+	}
 }
 
 
@@ -77,7 +143,7 @@ void UMyUserWidget::ToggleButtonSelected()
 {
 	if (bButtonIsSelected == false)
 	{
-		ButtonClicked->SetBackgroundColor(FLinearColor(0.f, 1.f, 0.f, 1.f));
+		ButtonClicked->SetBackgroundColor(FLinearColor(0.f, 1.f, 0.f, 1.f)); //Set to selected
 		ButtonSelected = ButtonClicked;
 		bButtonIsSelected = true;
 	}
@@ -85,7 +151,7 @@ void UMyUserWidget::ToggleButtonSelected()
 	{
 		if (ButtonClicked == ButtonSelected)
 		{
-			ButtonClicked->SetBackgroundColor(FLinearColor(1.f, 1.f, 1.f, 1.f));
+			ButtonClicked->SetBackgroundColor(FLinearColor(1.f, 1.f, 1.f, 1.f)); //Set to unselected
 			bButtonIsSelected = false;
 			if (ControllerRef->bBuildingBeingSpawned == true)
 			{
@@ -96,8 +162,8 @@ void UMyUserWidget::ToggleButtonSelected()
 		}
 		else
 		{
-			ButtonClicked->SetBackgroundColor(FLinearColor(0.f, 1.f, 0.f, 1.f));
-			ButtonSelected->SetBackgroundColor(FLinearColor(1.f, 1.f, 1.f, 1.f));
+			ButtonClicked->SetBackgroundColor(FLinearColor(0.f, 1.f, 0.f, 1.f)); //Set to selected
+			ButtonSelected->SetBackgroundColor(FLinearColor(1.f, 1.f, 1.f, 1.f)); //Set to unselected
 			ButtonSelected = ButtonClicked;
 			bButtonIsSelected = true;
 		}
