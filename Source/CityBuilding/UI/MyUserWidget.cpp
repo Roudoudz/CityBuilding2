@@ -71,10 +71,23 @@ void UMyUserWidget::ButtonRail_Pressed()
 		ButtonClicked = ButtonRail; //needs to be before ToggleButtonSelected()
 		ToggleButtonSelected();
 
-		eBuildingTypeToSpawn = BuildingTypes::Rail;
-		ControllerRef->ToggleSpawnBuilding();
+		// If the building spawned was rail, then do not spawn it again...
+		if (ButtonSelected == ButtonClicked)
+		{
+			ControllerRef->bBuildingBeingSpawned = false;
+			ControllerRef->bBuildingIsSpawnable = true;
+		}
+		//... else spawn the rail
+		else
+		{
+			ButtonClicked = ButtonRail; //needs to be before ToggleButtonSelected()
+			ToggleButtonSelected();
+
+			eBuildingTypeToSpawn = BuildingTypes::Rail;
+			ControllerRef->ToggleSpawnBuilding();
+		}
 	}
-	else
+	else if (ControllerRef->bBuildingBeingSpawned == false)
 	{
 		ButtonClicked = ButtonRail; //needs to be before ToggleButtonSelected()
 		ToggleButtonSelected();

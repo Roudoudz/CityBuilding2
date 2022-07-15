@@ -5,6 +5,7 @@
 
 #include "CityBuilding/Buildings/Buildings.h"
 #include "CityBuilding/Buildings/BuildingRoad.h"
+#include "CityBuilding/Buildings/Rail.h"
 #include "CityBuilding/Grid/ActorGridCell.h"
 #include "CityBuilding/Setup/MyPlayerController.h"
 
@@ -41,7 +42,7 @@ void ABuildingManager::BeginPlay()
 	}
 }
 
-
+// Called dring Tick() while the building is spawned
 void ABuildingManager::CheckIfBuildingIsPlaceable(AActorGridCell* ClosestGridCell, ABuildings* BuildingSpawned)
 {
 	// if GridCell underneath the spawnable building is occupied, then prevent from spawning
@@ -50,18 +51,36 @@ void ABuildingManager::CheckIfBuildingIsPlaceable(AActorGridCell* ClosestGridCel
 		BuildingSpawned->Mesh->SetMaterial(0, BuildingSpawned->M_Overlap);
 		ControllerRef->bCheckIfBuildingIsPlaceable = false;
 	}
+
 	// if GridCell underneath the spawnable building is NOT occupied, then check adjacent cells building type
-	if (ClosestGridCell->OccupyingType == BuildingTypes::None)
+	else if (ClosestGridCell->OccupyingType == BuildingTypes::None)
 	{
-		// Check in BuildingManager if the corners are road -> prevent  the building to be placed
-		CheckAdjacentRoads(ClosestGridCell, BuildingSpawned);
-		if (bAdjacentRoads == true)
+		// IF BUILDING SPAWNED IS A ROAD
+		if (BuildingSpawned->IsA<ABuildingRoad>())
 		{
-			BuildingSpawned->Mesh->SetMaterial(0, BuildingSpawned->M_Overlap);
-			ControllerRef->bCheckIfBuildingIsPlaceable = false;
+			// Check in BuildingManager if the corners are road -> prevent  the building to be placed
+			CheckAdjacentRoads(ClosestGridCell, BuildingSpawned);
+			//if (bAdjacentRoads == true)
+			//{
+			//	BuildingSpawned->Mesh->SetMaterial(0, BuildingSpawned->M_Overlap);
+			//	ControllerRef->bCheckIfBuildingIsPlaceable = false;
+			//}
+			//// ... if the corners are NOT road -> place the building
+			//else if (bAdjacentRoads == false)
+			//{
+			//	BuildingSpawned->Mesh->SetMaterial(0, BuildingSpawned->M_Selected);
+			//	ControllerRef->bCheckIfBuildingIsPlaceable = true;
+			//}
 		}
-		// ... if the corners are NOT road -> place the building
-		else if (bAdjacentRoads == false)
+
+		// IF BUILDING SPAWNED IS A RAIL
+		else if (BuildingSpawned->IsA<ARail>())
+		{
+			CheckAdjacentRails(ClosestGridCell, BuildingSpawned);
+		}
+
+		// IF BUILDING SPAWNED IS OTHER THAN LISTED ABOVE
+		else
 		{
 			BuildingSpawned->Mesh->SetMaterial(0, BuildingSpawned->M_Selected);
 			ControllerRef->bCheckIfBuildingIsPlaceable = true;
@@ -69,6 +88,8 @@ void ABuildingManager::CheckIfBuildingIsPlaceable(AActorGridCell* ClosestGridCel
 	}
 }
 
+//   ROADS    ///
+//***************
 // Check the adjacent grid cells to know if the road is placeable
 void ABuildingManager::CheckAdjacentRoads(AActorGridCell* ClosestGridCell, ABuildings* BuildingSpawned)
 {
@@ -83,32 +104,47 @@ void ABuildingManager::CheckAdjacentRoads(AActorGridCell* ClosestGridCell, ABuil
 		ClosestGridCell->NeighbourEast->OccupyingType == BuildingTypes::Road &&
 		ClosestGridCell->NeighbourNorth->NeighbourEast->OccupyingType == BuildingTypes::Road)
 	{
-		bAdjacentRoads = true;
+		BuildingSpawned->Mesh->SetMaterial(0, BuildingSpawned->M_Overlap);
+		ControllerRef->bCheckIfBuildingIsPlaceable = false;
+		//bAdjacentRoads = true;
+		return;
 	}
 	// If there are roads at N, W and NW, prevent from placing the building
 	else if (ClosestGridCell->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
 		ClosestGridCell->NeighbourWest->OccupyingType == BuildingTypes::Road &&
 		ClosestGridCell->NeighbourNorth->NeighbourWest->OccupyingType == BuildingTypes::Road)
 	{
-		bAdjacentRoads = true;
+		BuildingSpawned->Mesh->SetMaterial(0, BuildingSpawned->M_Overlap);
+		ControllerRef->bCheckIfBuildingIsPlaceable = false;
+		//bAdjacentRoads = true;
+		return;
 	}
 	// If there are roads at S, E and SE, prevent from placing the building
 	else if (ClosestGridCell->NeighbourSouth->OccupyingType == BuildingTypes::Road &&
 		ClosestGridCell->NeighbourEast->OccupyingType == BuildingTypes::Road &&
 		ClosestGridCell->NeighbourSouth->NeighbourEast->OccupyingType == BuildingTypes::Road)
 	{
-		bAdjacentRoads = true;
+		BuildingSpawned->Mesh->SetMaterial(0, BuildingSpawned->M_Overlap);
+		ControllerRef->bCheckIfBuildingIsPlaceable = false;
+		//bAdjacentRoads = true;
+		return;
 	}
 	// If there are roads at S, W and SW, prevent from placing the building
 	else if (ClosestGridCell->NeighbourSouth->OccupyingType == BuildingTypes::Road &&
 		ClosestGridCell->NeighbourWest->OccupyingType == BuildingTypes::Road &&
 		ClosestGridCell->NeighbourSouth->NeighbourWest->OccupyingType == BuildingTypes::Road)
 	{
-		bAdjacentRoads = true;
+		BuildingSpawned->Mesh->SetMaterial(0, BuildingSpawned->M_Overlap);
+		ControllerRef->bCheckIfBuildingIsPlaceable = false;
+		//bAdjacentRoads = true;
+		return;
 	}
+	// Allow the building to be placed
 	else
 	{
-		bAdjacentRoads = false;
+		BuildingSpawned->Mesh->SetMaterial(0, BuildingSpawned->M_Default);
+		ControllerRef->bCheckIfBuildingIsPlaceable = true;
+		//bAdjacentRoads = false;
 	}
 }
 
@@ -156,11 +192,11 @@ void ABuildingManager::AdjustRoadWalkways(AActorGridCell* ClosestGridCell, ABuil
 		if (WestNeighbourRoad)
 		{
 			WestNeighbourRoad->PathwayEast->SetVisibility(false);
-			WestNeighbourRoad->RoadlineHalfLeft->SetVisibility(true);
+			//WestNeighbourRoad->RoadlineHalfLeft->SetVisibility(true);
 		}
 				 
 		// Adjust roadlines
-		RoadSpawned->Roadline->SetRelativeRotation(FRotator(0, 0, 0));
+		//RoadSpawned->Roadline->SetRelativeRotation(FRotator(0, 0, 0));
 
 	}
 	// EAST
@@ -175,10 +211,61 @@ void ABuildingManager::AdjustRoadWalkways(AActorGridCell* ClosestGridCell, ABuil
 		if (EastNeighbourRoad)
 		{
 			EastNeighbourRoad->PathwayWest->SetVisibility(false);
-			EastNeighbourRoad->RoadlineHalfRight->SetVisibility(true);
+			//EastNeighbourRoad->RoadlineHalfRight->SetVisibility(true);
 		}
 		// Adjust roadlines
-		RoadSpawned->Roadline->SetRelativeRotation(FRotator(0, 0, 0));
+		//RoadSpawned->Roadline->SetRelativeRotation(FRotator(0, 0, 0));
+	}
+}
+
+
+//   RAILS    ///
+//***************
+// Check the adjacent grid cells to know if the road is placeable
+void ABuildingManager::CheckAdjacentRails(AActorGridCell* ClosestGridCell, ABuildings* BuildingSpawned)
+{
+	// Rail placeable if no other building type is in all the neighbouring cells
+	if (ClosestGridCell->NeighbourNorth->OccupyingType == BuildingTypes::None &&
+		ClosestGridCell->NeighbourEast->OccupyingType == BuildingTypes::None &&
+		ClosestGridCell->NeighbourSouth->OccupyingType == BuildingTypes::None &&
+		ClosestGridCell->NeighbourWest->OccupyingType == BuildingTypes::None &&
+		ClosestGridCell->NeighbourNorth->NeighbourEast->OccupyingType == BuildingTypes::None &&
+		ClosestGridCell->NeighbourNorth->NeighbourEast->OccupyingType == BuildingTypes::None &&
+		ClosestGridCell->NeighbourNorth->NeighbourEast->OccupyingType == BuildingTypes::None &&
+		ClosestGridCell->NeighbourNorth->NeighbourEast->OccupyingType == BuildingTypes::None)
+	{
+		BuildingSpawned->Mesh->SetMaterial(0, BuildingSpawned->M_Default);
+		ControllerRef->bCheckIfBuildingIsPlaceable = true;
+		//bAdjacentRoads = false;
+		return;
+	}
+	// PLACEABLE when rail in N, S, W or E
+	else if (ClosestGridCell->NeighbourNorth->OccupyingType == BuildingTypes::Rail ||
+		ClosestGridCell->NeighbourEast->OccupyingType == BuildingTypes::Rail ||
+		ClosestGridCell->NeighbourSouth->OccupyingType == BuildingTypes::Rail ||
+		ClosestGridCell->NeighbourWest->OccupyingType == BuildingTypes::Rail)
+	{
+		BuildingSpawned->Mesh->SetMaterial(0, BuildingSpawned->M_Default);
+		ControllerRef->bCheckIfBuildingIsPlaceable = true;
+		//bAdjacentRails = false;
+	}
+	// NOT PLACEABLE
+	else
+	{
+		BuildingSpawned->Mesh->SetMaterial(0, BuildingSpawned->M_Overlap);
+		ControllerRef->bCheckIfBuildingIsPlaceable = false;
+		//bAdjacentRoads = true;
+	}
+
+}
+void ABuildingManager::AdjustRailDirection(AActorGridCell* ClosestGridCell, ABuildings* BuildingSpawned)
+{
+	ARail* RailSpawned = Cast<ARail>(BuildingSpawned);
+
+	if (ClosestGridCell->NeighbourNorth->OccupyingType == BuildingTypes::Rail ||
+	ClosestGridCell->NeighbourSouth->OccupyingType == BuildingTypes::Rail )
+	{
+		RailSpawned->Mesh->SetRelativeRotation (FRotator(0, 90, 0));
 	}
 }
 

@@ -6,6 +6,7 @@
 #include "CityBuilding/Buildings/Buildings.h"
 #include "CityBuilding/Buildings/BuildingManager.h"
 #include "CityBuilding/Buildings/BuildingRoad.h"
+#include "CityBuilding/Buildings/Rail.h"
 #include "CityBuilding/Components/ClickHighlightComp.h"
 #include "CityBuilding/Grid/ActorGridCell.h"
 #include "CityBuilding/Grid/GridManager.h"
@@ -392,8 +393,17 @@ void AMyPlayerController::PlaceBuildingInWorld_TGDC()
 		// Change material to default
 		BuildingSpawned->Mesh->SetMaterial(0, BuildingSpawned->M_Default);
 
-		// Change pathways depending on neighbouring roads
-		CallAdjustRoadWalkways(ClosestGridCellLocal); // see below
+		// ROAD SPAWN: Change pathways depending on neighbouring roads
+		if (BuildingSpawned->IsA<ABuildingRoad>())
+		{
+			CallAdjustRoadWalkways(ClosestGridCellLocal); // see below
+		}
+		// RAIL SPAWNED
+		if (BuildingSpawned->IsA<ARail>())
+		{
+			CallAdjustRailDirection(ClosestGridCellLocal); // see below
+		}
+		
 		
 
 		// Call particle emitter in ABuildings
@@ -411,10 +421,15 @@ void AMyPlayerController::PlaceBuildingInWorld_TGDC()
 	}
 }
 
-// Call CheckIfBuildingIsPlaceable from the BuildingManager class
+
 void AMyPlayerController::CallAdjustRoadWalkways(AActorGridCell* ClosestGridCellDuringSpawning)
 {
 	BuildingManagerRef->AdjustRoadWalkways(ClosestGridCellDuringSpawning, BuildingSpawned);
+}
+
+void AMyPlayerController::CallAdjustRailDirection(AActorGridCell* ClosestGridCellDuringSpawning)
+{
+	BuildingManagerRef->AdjustRailDirection(ClosestGridCellDuringSpawning, BuildingSpawned);
 }
 
 void AMyPlayerController::DisableBuildingPhysics()

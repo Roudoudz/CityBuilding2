@@ -84,7 +84,10 @@ public:
 	bool bCheckIfBuildingIsPlaceable = false;
 	void CallCheckIfBuildingIsPlaceable(class AActorGridCell* ClosestGridCellDuringSpawning);
 
+	// ACTOR SPAWNED IS A ROAD
 	void CallAdjustRoadWalkways(AActorGridCell* ClosestGridCellDuringSpawning);
+	// ACTOR SPAWNED IS A RAIL
+	void CallAdjustRailDirection(AActorGridCell* ClosestGridCellDuringSpawning);
 
 	void DisableBuildingPhysics();
 	void CallSpawnDirtParticle();

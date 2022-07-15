@@ -20,6 +20,8 @@ E:\Program Files (x86)\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Eng
 E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Inc\CityBuilding\BuildingManager.generated.h
 E:\UE4 PROJECTS\City Building\CityBuilding\Source\CityBuilding/Buildings/BuildingRoad.h
 E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Inc\CityBuilding\BuildingRoad.generated.h
+E:\UE4 PROJECTS\City Building\CityBuilding\Source\CityBuilding/Buildings/Rail.h
+E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Inc\CityBuilding\Rail.generated.h
 E:\UE4 PROJECTS\City Building\CityBuilding\Source\CityBuilding/Components/ClickHighlightComp.h
 E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Inc\CityBuilding\ClickHighlightComp.generated.h
 E:\UE4 PROJECTS\City Building\CityBuilding\Source\CityBuilding/Grid/GridManager.h

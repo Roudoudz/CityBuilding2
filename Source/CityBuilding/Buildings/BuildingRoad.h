@@ -42,12 +42,26 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		UStaticMeshComponent* PathwaySE;
 
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	//	UStaticMeshComponent* Roadline;
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	//	UStaticMeshComponent* RoadlineHalfRight;
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	//	UStaticMeshComponent* RoadlineHalfLeft;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		UStaticMeshComponent* Roadline;
+		UDecalComponent* DecalStraight;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		UStaticMeshComponent* RoadlineHalfRight;
+		UDecalComponent* DecalRight;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		UStaticMeshComponent* RoadlineHalfLeft;
+		UDecalComponent* DecalLeft;
+
+	UPROPERTY(EditAnywhere, Category = "Material")
+		UMaterialInterface* D_RoadLine_Straight;
+	UPROPERTY(EditAnywhere, Category = "Material")
+		UMaterialInterface* D_RoadLine_East;
+	UPROPERTY(EditAnywhere, Category = "Material")
+		UMaterialInterface* D_RoadLine_West;
 
 protected:
 	// Called when the game starts or when spawned
