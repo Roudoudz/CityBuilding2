@@ -16,6 +16,8 @@ E:\UE4 PROJECTS\City Building\CityBuilding\Source\CityBuilding/Buildings/Rail.h
 E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Inc\CityBuilding\Rail.generated.h
 E:\UE4 PROJECTS\City Building\CityBuilding\Source\CityBuilding/Setup/MyPlayerController.h
 E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Inc\CityBuilding\MyPlayerController.generated.h
+E:\Program Files (x86)\UE_4.27\Engine\Source\Runtime\Engine\Classes\Components/DecalComponent.h
+E:\Program Files (x86)\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\DecalComponent.generated.h
 E:\Program Files (x86)\UE_4.27\Engine\Source\Runtime\Engine\Classes\Kismet/GameplayStatics.h
 E:\Program Files (x86)\UE_4.27\Engine\Source\Runtime\Engine\Classes\Kismet/KismetSystemLibrary.h
 E:\Program Files (x86)\UE_4.27\Engine\Source\Runtime\CoreUObject\Public\UObject/PropertyAccessUtil.h

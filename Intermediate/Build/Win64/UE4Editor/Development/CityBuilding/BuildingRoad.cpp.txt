@@ -7,10 +7,6 @@ E:\UE4 PROJECTS\City Building\CityBuilding\Source\CityBuilding/Grid/ActorGridCel
 E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Inc\CityBuilding\ActorGridCell.generated.h
 E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Inc\CityBuilding\Buildings.generated.h
 E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Inc\CityBuilding\BuildingRoad.generated.h
-E:\UE4 PROJECTS\City Building\CityBuilding\Source\CityBuilding/Components/ClickHighlightComp.h
-E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Inc\CityBuilding\ClickHighlightComp.generated.h
-E:\UE4 PROJECTS\City Building\CityBuilding\Source\CityBuilding/Setup/MyPlayerController.h
-E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Inc\CityBuilding\MyPlayerController.generated.h
 E:\Program Files (x86)\UE_4.27\Engine\Source\Runtime\Engine\Classes\Components/CapsuleComponent.h
 E:\Program Files (x86)\UE_4.27\Engine\Source\Runtime\Engine\Classes\Components/ShapeComponent.h
 E:\Program Files (x86)\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\ShapeComponent.generated.h

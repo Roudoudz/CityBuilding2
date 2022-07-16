@@ -12,6 +12,7 @@
 
 class AActorGridCell;
 class ABuildings;
+class ABuildingRoad;
 
 
 // DataTable are UStruct with more stuff inside
@@ -66,7 +67,10 @@ public:
 	bool bAdjacentRoads = false; //check is the building is placeable
 	void CheckIfBuildingIsPlaceable(AActorGridCell* ClosestGridCell, ABuildings* BuildingSpawned);
 	void CheckAdjacentRoads(AActorGridCell* ClosestGridCell, ABuildings* BuildingSpawned);
+	void AdjustRoadFeatures(AActorGridCell* ClosestGridCell, ABuildings* BuildingSpawned);
+	//TArray<ABuildingRoad*> tNeighbouringRoads;  // store neighbouring roads
 	void AdjustRoadWalkways(AActorGridCell* ClosestGridCell, ABuildings* BuildingSpawned);
+	void AdjustRoadline(AActorGridCell* ClosestGridCell, ABuildings* BuildingSpawned);
 
 	/* RAIL BUILDING */
 	bool bAdjacentRails = false;
@@ -98,4 +102,11 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+private:
+	ABuildingRoad* NorthNeighbourRoad;
+	ABuildingRoad* SouthNeighbourRoad;
+	ABuildingRoad* EastNeighbourRoad;
+	ABuildingRoad* WestNeighbourRoad;
+
+	ABuildingRoad* RoadSpawned;
 };

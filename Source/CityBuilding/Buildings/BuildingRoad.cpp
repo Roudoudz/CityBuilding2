@@ -3,9 +3,7 @@
 
 #include "CityBuilding/Buildings/BuildingRoad.h"
 
-#include "CityBuilding/Components/ClickHighlightComp.h"
-#include "CityBuilding/Grid/ActorGridCell.h"
-#include "CityBuilding/Setup/MyPlayerController.h"
+//#include "CityBuilding/Setup/MyPlayerController.h"
 
 #include "Components/CapsuleComponent.h"
 #include "Components/DecalComponent.h"
@@ -71,57 +69,26 @@ ABuildingRoad::ABuildingRoad()
 	PathwaySW->SetRelativeLocation(FVector(-45, -45, PathwayLocZ));
 
 	// ROAD LINES
-	//Roadline = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Roadline"));
-	//Roadline->SetupAttachment(Mesh);
-	//Roadline->SetRelativeScale3D(FVector(0.1, 1, 0.05));
-	//Roadline->SetRelativeLocation(FVector(0, 0, 100));
-	//Roadline->SetRelativeRotation(FRotator(0, 90, 0)); //(Y,X,Z)
+	Roadline = CreateDefaultSubobject<UDecalComponent>("RoadlineStraight");
+	Roadline->SetupAttachment(Mesh);
+	Roadline->DecalSize = FVector(3.f, 40.f, 8000.f);
+	Roadline->SetRelativeScale3D(FVector(1.f, 1.f, 1.f));
+	Roadline->SetRelativeLocation(FVector(0.f, 0.f, 0.0f));
+	Roadline->SetRelativeRotation(FRotator(90.f, 0.f, 0.f));
+	Roadline->SetVisibility(true);
 
-	//RoadlineHalfRight = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("RoadlineHalfRight"));
-	//RoadlineHalfRight->SetupAttachment(Roadline);
-	//RoadlineHalfRight->SetWorldScale3D(FVector(1, 0.5, 1));
-	//RoadlineHalfRight->SetRelativeLocation(FVector(250, 0, 100)); //(Y,X,Z)
-	//RoadlineHalfRight->SetRelativeRotation(FRotator(0, 90, 0));
-
-	//RoadlineHalfLeft = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("RoadlineHalfLeft"));
-	//RoadlineHalfLeft->SetupAttachment(Roadline);
-	//RoadlineHalfLeft->SetWorldScale3D(FVector(1, 0.5, 1));
-	//RoadlineHalfLeft->SetRelativeLocation(FVector(-250, 0, 100)); //(Y,X,Z)
-	//RoadlineHalfLeft->SetRelativeRotation(FRotator(0, 90, 0));
-
-	//DecalStraight = CreateDefaultSubobject<UDecalComponent>("DecalStraight");
-	//DecalStraight->SetupAttachment(RootComponent);
-	//DecalStraight->DecalSize = FVector(40.f, 80.f, 80.f);
-	////DecalStraight->SetRelativeScale3D(FVector(3.f, 5.3f, 5.3f));
-	//DecalStraight->SetRelativeLocation(FVector(0.f, 0.f, 0.0f));
-	//DecalStraight->SetRelativeRotation(FRotator(0.f, 0.f, 0.f).Quaternion());
-	//DecalStraight->SetVisibility(true);
-
-	/*DecalRight = CreateDefaultSubobject<UDecalComponent>("DecalRight");
-	DecalRight->SetupAttachment(RootComponent);
-	DecalRight->DecalSize = FVector(15.f, 15.f, 15.f);
-	DecalRight->SetRelativeScale3D(FVector(3.f, 5.3f, 5.3f));
-	DecalRight->SetRelativeLocation(FVector(0.f, 0.f, 0.0f));
-	DecalRight->SetRelativeRotation(FRotator(90.f, 0.f, 0.f).Quaternion());
-	DecalRight->SetVisibility(false);
-
-	DecalLeft = CreateDefaultSubobject<UDecalComponent>("DecalLeft");
-	DecalLeft->SetupAttachment(RootComponent);
-	DecalLeft->DecalSize = FVector(10.f, 20.f, 10.f);
-	DecalLeft->SetRelativeScale3D(FVector(3.f, 5.3f, 5.3f));
-	DecalLeft->SetRelativeLocation(FVector(0.f, 0.f, 0.0f));
-	DecalLeft->SetRelativeRotation(FRotator(90.f, 0.f, 0.f).Quaternion());
-	DecalLeft->SetVisibility(false);*/
-
+	/*RoadlineCurve = CreateDefaultSubobject<UDecalComponent>("RoadlineCurve");
+	RoadlineCurve->SetupAttachment(Mesh);
+	RoadlineCurve->DecalSize = FVector(3.f, 40.f, 8000.f);
+	RoadlineCurve->SetRelativeScale3D(FVector(1.f, 1.f, 1.f));
+	RoadlineCurve->SetRelativeLocation(FVector(0.f, 0.f, 0.0f));
+	RoadlineCurve->SetRelativeRotation(FRotator(90.f, 0.f, 0.f));
+	RoadlineCurve->SetVisibility(false);*/
 }
 
 void ABuildingRoad::BeginPlay()
 {
 	Super::BeginPlay();
-
-	// Hie the half road line sections
-	//RoadlineHalfRight->SetVisibility(false);
-	//RoadlineHalfLeft->SetVisibility(false);
 
 	// Used to define the type of building in ActorGridCell
 	eBuildingType = BuildingTypes::Road;

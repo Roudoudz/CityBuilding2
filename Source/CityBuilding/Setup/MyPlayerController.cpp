@@ -32,17 +32,15 @@ AMyPlayerController::AMyPlayerController()
 	// Set this pawn to tick every frame (and can turn it off when needed)
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bStartWithTickEnabled = true;
-
 }
 
 void AMyPlayerController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
 
-	check(InputComponent); //Protect the input component if not associated
+	check(InputComponent); //Protects the input component if not associated
 
 	// Pawn movement
-	//InputComponent->BindAction("SpawnBuilding", IE_Pressed, this, &AMyPlayerController::ToggleSpawnBuilding);
 	InputComponent->BindAction("MouseLeftClick", IE_Pressed, this, &AMyPlayerController::CallMouseLeftClick);
 	InputComponent->BindAction("MouseRightClick", IE_Pressed, this, &AMyPlayerController::CallMouseRightClick);
 }
@@ -63,19 +61,14 @@ void AMyPlayerController::BeginPlay()
 	GridManagerRef = Cast<AGridManager>(UGameplayStatics::GetActorOfClass(GetWorld(), AGridManager::StaticClass()));
 	if (!GridManagerRef)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, FString::Printf(TEXT("NO GRID MANAGER ACTOR FOUND. PLACE ONE IN THE LEVEL!")));
+		Red("NO GRID MANAGER ACTOR FOUND. PLACE ONE IN THE LEVEL!");
 
 	}
 	// Building Manager Actor
 	BuildingManagerRef = Cast<ABuildingManager>(UGameplayStatics::GetActorOfClass(GetWorld(), ABuildingManager::StaticClass()));
 	if (!BuildingManagerRef)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, FString::Printf(TEXT("NO BUILDING MANAGER ACTOR FOUND. PLACE ONE IN THE LEVEL!")));
-	}
-	// Building ref
-	if (!BuildingsClassRef)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, FString::Printf(TEXT("NO BuildingsClassRef. Set it up in the Player Controller!")));
+		Red("NO BUILDING MANAGER ACTOR FOUND. PLACE ONE IN THE LEVEL!");
 	}
 	// Postprocessor volume ref
 	PostProcessVolRef = Cast<APostProcVol>(UGameplayStatics::GetActorOfClass(GetWorld(), APostProcVol::StaticClass()));
@@ -85,11 +78,11 @@ void AMyPlayerController::BeginPlay()
 	}
 	
 	// Building types references
-	BuildingRoadRef = Cast<ABuildingRoad>(UGameplayStatics::GetActorOfClass(GetWorld(), ABuildingRoad::StaticClass()));
+	/*BuildingRoadRef = Cast<ABuildingRoad>(UGameplayStatics::GetActorOfClass(GetWorld(), ABuildingRoad::StaticClass()));
 	if (!BuildingRoadRef)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, FString::Printf(TEXT("NO BuildingRoadRef")));
-	}
+	}*/
 
 	/****   WIDGETS   *****/
 	if (IsValid(BP_BuildingWidgetRef))
@@ -212,6 +205,7 @@ void AMyPlayerController::SpawnBuilding()
 		//	}
 		//}
 		/* Reference to the building type from the enum */
+		// References to the BP of the building is stored in the BuldingManagement class
 		if (BuildingWidget->eBuildingTypeToSpawn == BuildingTypes::Road)
 		{
 			if (BuildingManagerRef->BP_BuildingRoad)
@@ -384,35 +378,45 @@ void AMyPlayerController::PlaceBuildingInWorld_TGDC()
 		FVector BuildingSpawnedLocationLocal = BuildingSpawned->GetActorLocation();
 		GridManagerRef->GetClosestGridCell(BuildingSpawnedLocationLocal); // using the location of the actor placed
 
-		//AActorGridCell* ClosestGridCell = GridManagerRef->ClosestGridCell;
-		
-		// TO DO: Defined the type of building from the button clicked in the UI
-		BuildingTypes BuildingOccupyingType = BuildingTypes::Road;
-		GridManagerRef->ClosestGridCell->SetOccupied(BuildingOccupyingType, BuildingSpawned);
-
 		// Change material to default
 		BuildingSpawned->Mesh->SetMaterial(0, BuildingSpawned->M_Default);
 
 		// ROAD SPAWN: Change pathways depending on neighbouring roads
 		if (BuildingSpawned->IsA<ABuildingRoad>())
 		{
-			CallAdjustRoadWalkways(ClosestGridCellLocal); // see below
+			ABuildingRoad* RoadSpawned = Cast<ABuildingRoad>(UGameplayStatics::GetActorOfClass(GetWorld(), ABuildingRoad::StaticClass()));
+			BuildingTypes BuildingOccupyingType = BuildingTypes::Road;
+			GridManagerRef->ClosestGridCell->SetOccupied(BuildingOccupyingType, BuildingSpawned);
+
+			CallAdjustRoadFeatures(ClosestGridCellLocal); // see below
+			
+			// Call particle emitter
+			if (RoadSpawned)
+			{
+				FVector DirtLocation = GridManagerRef->ClosestPosition + FVector(0.f, 0.f, 40.f);
+				RoadSpawned->SpawnDirtParticle(DirtLocation);
+			}
 		}
 		// RAIL SPAWNED
 		if (BuildingSpawned->IsA<ARail>())
 		{
+			ARail* RailSpawned = Cast<ARail>(UGameplayStatics::GetActorOfClass(GetWorld(), ARail::StaticClass()));
+			BuildingTypes BuildingOccupyingType = BuildingTypes::Rail;
+			GridManagerRef->ClosestGridCell->SetOccupied(BuildingOccupyingType, BuildingSpawned);
+
 			CallAdjustRailDirection(ClosestGridCellLocal); // see below
+
+			// Call particle emitter
+			if (RailSpawned)
+			{
+				FVector DirtLocation = GridManagerRef->ClosestPosition + FVector(0.f, 0.f, 40.f);
+				RailSpawned->SpawnDirtParticle(DirtLocation);
+			}
 		}
 		
-		
-
-		// Call particle emitter in ABuildings
-		CallSpawnDirtParticle();
-
 		// Reset PhysicsSimulate to false after t time so that the building do not interacy with the environment
 		FTimerHandle TimerBuildingFalling;
 		GetWorldTimerManager().SetTimer(TimerBuildingFalling, this, &AMyPlayerController::DisableBuildingPhysics, 1.5f);
-
 	}
 	else
 	{
@@ -421,10 +425,10 @@ void AMyPlayerController::PlaceBuildingInWorld_TGDC()
 	}
 }
 
-
-void AMyPlayerController::CallAdjustRoadWalkways(AActorGridCell* ClosestGridCellDuringSpawning)
+/**** ADJUST BUILDING DIRECTION */
+void AMyPlayerController::CallAdjustRoadFeatures(AActorGridCell* ClosestGridCellDuringSpawning)
 {
-	BuildingManagerRef->AdjustRoadWalkways(ClosestGridCellDuringSpawning, BuildingSpawned);
+	BuildingManagerRef->AdjustRoadFeatures(ClosestGridCellDuringSpawning, BuildingSpawned);
 }
 
 void AMyPlayerController::CallAdjustRailDirection(AActorGridCell* ClosestGridCellDuringSpawning)
@@ -457,12 +461,9 @@ void AMyPlayerController::CallSpawnDirtParticle()
 }
 
 
-
 /* DEBUD SECTION
 
 FString ActorName = BuildingSpawned->GetActorLabel();
 	GEngine->AddOnScreenDebugMessage(-1, .0f, FColor::Silver, FString::Printf(TEXT("Actor: %s"), *ActorName));
-
-
 */
 

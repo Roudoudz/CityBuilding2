@@ -55,6 +55,9 @@ public:
 	//AActorGridCell* GetClosestGridCell(FVector MouseLocation);
 	AActorGridCell* GetClosestGridCell(FVector BuildingSpawnedLocation);
 
+	// Array of neighbouring cells
+	TArray<class ABuildings*> tNeighbouringCells;
+
 	void Debug_AddNeighboursToText();
 
 	// Neighbouring actors

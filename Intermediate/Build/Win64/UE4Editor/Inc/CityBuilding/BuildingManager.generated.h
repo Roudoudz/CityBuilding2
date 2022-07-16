@@ -13,7 +13,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define CITYBUILDING_BuildingManager_generated_h
 
-#define CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_21_GENERATED_BODY \
+#define CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_22_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FBuildingManagerStruct_Statics; \
 	CITYBUILDING_API static class UScriptStruct* StaticStruct(); \
 	typedef FTableRowBase Super;
@@ -21,10 +21,10 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
 template<> CITYBUILDING_API UScriptStruct* StaticStruct<struct FBuildingManagerStruct>();
 
-#define CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_49_SPARSE_DATA
-#define CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_49_RPC_WRAPPERS
-#define CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_49_RPC_WRAPPERS_NO_PURE_DECLS
-#define CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_49_INCLASS_NO_PURE_DECLS \
+#define CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_50_SPARSE_DATA
+#define CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_50_RPC_WRAPPERS
+#define CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_50_RPC_WRAPPERS_NO_PURE_DECLS
+#define CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_50_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesABuildingManager(); \
 	friend struct Z_Construct_UClass_ABuildingManager_Statics; \
@@ -33,7 +33,7 @@ public: \
 	DECLARE_SERIALIZER(ABuildingManager)
 
 
-#define CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_49_INCLASS \
+#define CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_50_INCLASS \
 private: \
 	static void StaticRegisterNativesABuildingManager(); \
 	friend struct Z_Construct_UClass_ABuildingManager_Statics; \
@@ -42,7 +42,7 @@ public: \
 	DECLARE_SERIALIZER(ABuildingManager)
 
 
-#define CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_49_STANDARD_CONSTRUCTORS \
+#define CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_50_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API ABuildingManager(const FObjectInitializer& ObjectInitializer); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(ABuildingManager) \
@@ -55,7 +55,7 @@ private: \
 public:
 
 
-#define CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_49_ENHANCED_CONSTRUCTORS \
+#define CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_50_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	NO_API ABuildingManager(ABuildingManager&&); \
@@ -66,28 +66,28 @@ public: \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(ABuildingManager)
 
 
-#define CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_49_PRIVATE_PROPERTY_OFFSET
-#define CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_46_PROLOG
-#define CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_49_GENERATED_BODY_LEGACY \
+#define CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_50_PRIVATE_PROPERTY_OFFSET
+#define CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_47_PROLOG
+#define CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_50_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_49_PRIVATE_PROPERTY_OFFSET \
-	CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_49_SPARSE_DATA \
-	CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_49_RPC_WRAPPERS \
-	CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_49_INCLASS \
-	CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_49_STANDARD_CONSTRUCTORS \
+	CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_50_PRIVATE_PROPERTY_OFFSET \
+	CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_50_SPARSE_DATA \
+	CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_50_RPC_WRAPPERS \
+	CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_50_INCLASS \
+	CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_50_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_49_GENERATED_BODY \
+#define CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_50_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_49_PRIVATE_PROPERTY_OFFSET \
-	CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_49_SPARSE_DATA \
-	CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_49_RPC_WRAPPERS_NO_PURE_DECLS \
-	CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_49_INCLASS_NO_PURE_DECLS \
-	CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_49_ENHANCED_CONSTRUCTORS \
+	CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_50_PRIVATE_PROPERTY_OFFSET \
+	CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_50_SPARSE_DATA \
+	CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_50_RPC_WRAPPERS_NO_PURE_DECLS \
+	CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_50_INCLASS_NO_PURE_DECLS \
+	CityBuilding_Source_CityBuilding_Buildings_BuildingManager_h_50_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

@@ -24,8 +24,8 @@ public:
 	class ACameraPawnRTS* CameraPawnRef;
 	class UCameraMovementComponent* CameraMovementRef;
 	class APostProcessVolume* PostProcessVolRef;
-	UPROPERTY(EditAnywhere, Category = "Building|Class")
-		TSubclassOf<ABuildings> BuildingsClassRef;
+	//UPROPERTY(EditAnywhere, Category = "Building|Class")
+	//	TSubclassOf<ABuildings> BuildingsClassRef;
 	class AGridManager* GridManagerRef;
 	class ABuildingManager* BuildingManagerRef;
 
@@ -85,7 +85,8 @@ public:
 	void CallCheckIfBuildingIsPlaceable(class AActorGridCell* ClosestGridCellDuringSpawning);
 
 	// ACTOR SPAWNED IS A ROAD
-	void CallAdjustRoadWalkways(AActorGridCell* ClosestGridCellDuringSpawning);
+	void CallAdjustRoadFeatures (AActorGridCell* ClosestGridCellDuringSpawning);
+
 	// ACTOR SPAWNED IS A RAIL
 	void CallAdjustRailDirection(AActorGridCell* ClosestGridCellDuringSpawning);
 

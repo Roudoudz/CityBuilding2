@@ -76,29 +76,25 @@ void EmptyLinkFunctionForGeneratedCodeBuildingRoad() {}
 #endif
 		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_PathwaySE;
 #if WITH_METADATA
-		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_DecalStraight_MetaData[];
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_Roadline_MetaData[];
 #endif
-		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_DecalStraight;
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_Roadline;
 #if WITH_METADATA
-		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_DecalRight_MetaData[];
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_MRoadlineStraight_MetaData[];
 #endif
-		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_DecalRight;
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_MRoadlineStraight;
 #if WITH_METADATA
-		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_DecalLeft_MetaData[];
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_MRoadlineCurve_MetaData[];
 #endif
-		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_DecalLeft;
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_MRoadlineCurve;
 #if WITH_METADATA
-		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_D_RoadLine_Straight_MetaData[];
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_MThreeLines_MetaData[];
 #endif
-		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_D_RoadLine_Straight;
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_MThreeLines;
 #if WITH_METADATA
-		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_D_RoadLine_East_MetaData[];
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_MFourLines_MetaData[];
 #endif
-		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_D_RoadLine_East;
-#if WITH_METADATA
-		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_D_RoadLine_West_MetaData[];
-#endif
-		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_D_RoadLine_West;
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_MFourLines;
 		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UE4CodeGen_Private::FClassParams ClassParams;
@@ -192,52 +188,45 @@ void EmptyLinkFunctionForGeneratedCodeBuildingRoad() {}
 #endif
 	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABuildingRoad_Statics::NewProp_PathwaySE = { "PathwaySE", nullptr, (EPropertyFlags)0x001000000008000d, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ABuildingRoad, PathwaySE), Z_Construct_UClass_UStaticMeshComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_ABuildingRoad_Statics::NewProp_PathwaySE_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ABuildingRoad_Statics::NewProp_PathwaySE_MetaData)) };
 #if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ABuildingRoad_Statics::NewProp_DecalStraight_MetaData[] = {
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ABuildingRoad_Statics::NewProp_Roadline_MetaData[] = {
 		{ "Category", "BuildingRoad" },
-		{ "Comment", "//UPROPERTY(EditAnywhere, BlueprintReadWrite)\n//\x09UStaticMeshComponent* Roadline;\n//UPROPERTY(EditAnywhere, BlueprintReadWrite)\n//\x09UStaticMeshComponent* RoadlineHalfRight;\n//UPROPERTY(EditAnywhere, BlueprintReadWrite)\n//\x09UStaticMeshComponent* RoadlineHalfLeft;\n" },
+		{ "Comment", "/* DECALS */" },
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Buildings/BuildingRoad.h" },
-		{ "ToolTip", "UPROPERTY(EditAnywhere, BlueprintReadWrite)\n       UStaticMeshComponent* Roadline;\nUPROPERTY(EditAnywhere, BlueprintReadWrite)\n       UStaticMeshComponent* RoadlineHalfRight;\nUPROPERTY(EditAnywhere, BlueprintReadWrite)\n       UStaticMeshComponent* RoadlineHalfLeft;" },
+		{ "ToolTip", "DECALS" },
 	};
 #endif
-	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABuildingRoad_Statics::NewProp_DecalStraight = { "DecalStraight", nullptr, (EPropertyFlags)0x001000000008000d, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ABuildingRoad, DecalStraight), Z_Construct_UClass_UDecalComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_ABuildingRoad_Statics::NewProp_DecalStraight_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ABuildingRoad_Statics::NewProp_DecalStraight_MetaData)) };
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABuildingRoad_Statics::NewProp_Roadline = { "Roadline", nullptr, (EPropertyFlags)0x001000000008000d, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ABuildingRoad, Roadline), Z_Construct_UClass_UDecalComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_ABuildingRoad_Statics::NewProp_Roadline_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ABuildingRoad_Statics::NewProp_Roadline_MetaData)) };
 #if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ABuildingRoad_Statics::NewProp_DecalRight_MetaData[] = {
-		{ "Category", "BuildingRoad" },
-		{ "EditInline", "true" },
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ABuildingRoad_Statics::NewProp_MRoadlineStraight_MetaData[] = {
+		{ "Category", "Material" },
+		{ "Comment", "//UPROPERTY(EditAnywhere, BlueprintReadWrite)\n//\x09UDecalComponent* RoadlineCurve;\n// Materials\n" },
 		{ "ModuleRelativePath", "Buildings/BuildingRoad.h" },
+		{ "ToolTip", "UPROPERTY(EditAnywhere, BlueprintReadWrite)\n       UDecalComponent* RoadlineCurve;\n Materials" },
 	};
 #endif
-	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABuildingRoad_Statics::NewProp_DecalRight = { "DecalRight", nullptr, (EPropertyFlags)0x001000000008000d, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ABuildingRoad, DecalRight), Z_Construct_UClass_UDecalComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_ABuildingRoad_Statics::NewProp_DecalRight_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ABuildingRoad_Statics::NewProp_DecalRight_MetaData)) };
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABuildingRoad_Statics::NewProp_MRoadlineStraight = { "MRoadlineStraight", nullptr, (EPropertyFlags)0x0010000000000001, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ABuildingRoad, MRoadlineStraight), Z_Construct_UClass_UMaterialInterface_NoRegister, METADATA_PARAMS(Z_Construct_UClass_ABuildingRoad_Statics::NewProp_MRoadlineStraight_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ABuildingRoad_Statics::NewProp_MRoadlineStraight_MetaData)) };
 #if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ABuildingRoad_Statics::NewProp_DecalLeft_MetaData[] = {
-		{ "Category", "BuildingRoad" },
-		{ "EditInline", "true" },
-		{ "ModuleRelativePath", "Buildings/BuildingRoad.h" },
-	};
-#endif
-	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABuildingRoad_Statics::NewProp_DecalLeft = { "DecalLeft", nullptr, (EPropertyFlags)0x001000000008000d, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ABuildingRoad, DecalLeft), Z_Construct_UClass_UDecalComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_ABuildingRoad_Statics::NewProp_DecalLeft_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ABuildingRoad_Statics::NewProp_DecalLeft_MetaData)) };
-#if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ABuildingRoad_Statics::NewProp_D_RoadLine_Straight_MetaData[] = {
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ABuildingRoad_Statics::NewProp_MRoadlineCurve_MetaData[] = {
 		{ "Category", "Material" },
 		{ "ModuleRelativePath", "Buildings/BuildingRoad.h" },
 	};
 #endif
-	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABuildingRoad_Statics::NewProp_D_RoadLine_Straight = { "D_RoadLine_Straight", nullptr, (EPropertyFlags)0x0010000000000001, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ABuildingRoad, D_RoadLine_Straight), Z_Construct_UClass_UMaterialInterface_NoRegister, METADATA_PARAMS(Z_Construct_UClass_ABuildingRoad_Statics::NewProp_D_RoadLine_Straight_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ABuildingRoad_Statics::NewProp_D_RoadLine_Straight_MetaData)) };
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABuildingRoad_Statics::NewProp_MRoadlineCurve = { "MRoadlineCurve", nullptr, (EPropertyFlags)0x0010000000000001, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ABuildingRoad, MRoadlineCurve), Z_Construct_UClass_UMaterialInterface_NoRegister, METADATA_PARAMS(Z_Construct_UClass_ABuildingRoad_Statics::NewProp_MRoadlineCurve_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ABuildingRoad_Statics::NewProp_MRoadlineCurve_MetaData)) };
 #if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ABuildingRoad_Statics::NewProp_D_RoadLine_East_MetaData[] = {
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ABuildingRoad_Statics::NewProp_MThreeLines_MetaData[] = {
 		{ "Category", "Material" },
 		{ "ModuleRelativePath", "Buildings/BuildingRoad.h" },
 	};
 #endif
-	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABuildingRoad_Statics::NewProp_D_RoadLine_East = { "D_RoadLine_East", nullptr, (EPropertyFlags)0x0010000000000001, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ABuildingRoad, D_RoadLine_East), Z_Construct_UClass_UMaterialInterface_NoRegister, METADATA_PARAMS(Z_Construct_UClass_ABuildingRoad_Statics::NewProp_D_RoadLine_East_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ABuildingRoad_Statics::NewProp_D_RoadLine_East_MetaData)) };
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABuildingRoad_Statics::NewProp_MThreeLines = { "MThreeLines", nullptr, (EPropertyFlags)0x0010000000000001, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ABuildingRoad, MThreeLines), Z_Construct_UClass_UMaterialInterface_NoRegister, METADATA_PARAMS(Z_Construct_UClass_ABuildingRoad_Statics::NewProp_MThreeLines_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ABuildingRoad_Statics::NewProp_MThreeLines_MetaData)) };
 #if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ABuildingRoad_Statics::NewProp_D_RoadLine_West_MetaData[] = {
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ABuildingRoad_Statics::NewProp_MFourLines_MetaData[] = {
 		{ "Category", "Material" },
 		{ "ModuleRelativePath", "Buildings/BuildingRoad.h" },
 	};
 #endif
-	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABuildingRoad_Statics::NewProp_D_RoadLine_West = { "D_RoadLine_West", nullptr, (EPropertyFlags)0x0010000000000001, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ABuildingRoad, D_RoadLine_West), Z_Construct_UClass_UMaterialInterface_NoRegister, METADATA_PARAMS(Z_Construct_UClass_ABuildingRoad_Statics::NewProp_D_RoadLine_West_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ABuildingRoad_Statics::NewProp_D_RoadLine_West_MetaData)) };
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABuildingRoad_Statics::NewProp_MFourLines = { "MFourLines", nullptr, (EPropertyFlags)0x0010000000000001, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ABuildingRoad, MFourLines), Z_Construct_UClass_UMaterialInterface_NoRegister, METADATA_PARAMS(Z_Construct_UClass_ABuildingRoad_Statics::NewProp_MFourLines_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ABuildingRoad_Statics::NewProp_MFourLines_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ABuildingRoad_Statics::PropPointers[] = {
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABuildingRoad_Statics::NewProp_ScalePathway,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABuildingRoad_Statics::NewProp_PathwayLocZ,
@@ -249,12 +238,11 @@ void EmptyLinkFunctionForGeneratedCodeBuildingRoad() {}
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABuildingRoad_Statics::NewProp_PathwayNE,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABuildingRoad_Statics::NewProp_PathwaySW,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABuildingRoad_Statics::NewProp_PathwaySE,
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABuildingRoad_Statics::NewProp_DecalStraight,
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABuildingRoad_Statics::NewProp_DecalRight,
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABuildingRoad_Statics::NewProp_DecalLeft,
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABuildingRoad_Statics::NewProp_D_RoadLine_Straight,
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABuildingRoad_Statics::NewProp_D_RoadLine_East,
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABuildingRoad_Statics::NewProp_D_RoadLine_West,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABuildingRoad_Statics::NewProp_Roadline,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABuildingRoad_Statics::NewProp_MRoadlineStraight,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABuildingRoad_Statics::NewProp_MRoadlineCurve,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABuildingRoad_Statics::NewProp_MThreeLines,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABuildingRoad_Statics::NewProp_MFourLines,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_ABuildingRoad_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<ABuildingRoad>::IsAbstract,
@@ -283,7 +271,7 @@ void EmptyLinkFunctionForGeneratedCodeBuildingRoad() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ABuildingRoad, 642293047);
+	IMPLEMENT_CLASS(ABuildingRoad, 4266637320);
 	template<> CITYBUILDING_API UClass* StaticClass<ABuildingRoad>()
 	{
 		return ABuildingRoad::StaticClass();

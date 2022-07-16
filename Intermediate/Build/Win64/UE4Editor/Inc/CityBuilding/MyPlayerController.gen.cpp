@@ -17,8 +17,8 @@ void EmptyLinkFunctionForGeneratedCodeMyPlayerController() {}
 	CITYBUILDING_API UClass* Z_Construct_UClass_AMyPlayerController();
 	ENGINE_API UClass* Z_Construct_UClass_APlayerController();
 	UPackage* Z_Construct_UPackage__Script_CityBuilding();
-	COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 	CITYBUILDING_API UClass* Z_Construct_UClass_ABuildings_NoRegister();
+	COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 	CITYBUILDING_API UClass* Z_Construct_UClass_UMyUserWidget_NoRegister();
 // End Cross Module References
 	DEFINE_FUNCTION(AMyPlayerController::execSpawnBuilding)
@@ -70,10 +70,6 @@ void EmptyLinkFunctionForGeneratedCodeMyPlayerController() {}
 		static const UE4CodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
 #if WITH_METADATA
-		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_BuildingsClassRef_MetaData[];
-#endif
-		static const UE4CodeGen_Private::FClassPropertyParams NewProp_BuildingsClassRef;
-#if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_HeightSpawnBuilding_MetaData[];
 #endif
 		static const UE4CodeGen_Private::FIntPropertyParams NewProp_HeightSpawnBuilding;
@@ -113,13 +109,6 @@ void EmptyLinkFunctionForGeneratedCodeMyPlayerController() {}
 		{ "ModuleRelativePath", "Setup/MyPlayerController.h" },
 	};
 #endif
-#if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyPlayerController_Statics::NewProp_BuildingsClassRef_MetaData[] = {
-		{ "Category", "Building|Class" },
-		{ "ModuleRelativePath", "Setup/MyPlayerController.h" },
-	};
-#endif
-	const UE4CodeGen_Private::FClassPropertyParams Z_Construct_UClass_AMyPlayerController_Statics::NewProp_BuildingsClassRef = { "BuildingsClassRef", nullptr, (EPropertyFlags)0x0014000000000001, UE4CodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMyPlayerController, BuildingsClassRef), Z_Construct_UClass_ABuildings_NoRegister, Z_Construct_UClass_UClass, METADATA_PARAMS(Z_Construct_UClass_AMyPlayerController_Statics::NewProp_BuildingsClassRef_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMyPlayerController_Statics::NewProp_BuildingsClassRef_MetaData)) };
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyPlayerController_Statics::NewProp_HeightSpawnBuilding_MetaData[] = {
 		{ "Category", "Building|Spawn" },
@@ -163,7 +152,6 @@ void EmptyLinkFunctionForGeneratedCodeMyPlayerController() {}
 #endif
 	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMyPlayerController_Statics::NewProp_BuildingWidget = { "BuildingWidget", nullptr, (EPropertyFlags)0x001000000008000c, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMyPlayerController, BuildingWidget), Z_Construct_UClass_UMyUserWidget_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AMyPlayerController_Statics::NewProp_BuildingWidget_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMyPlayerController_Statics::NewProp_BuildingWidget_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AMyPlayerController_Statics::PropPointers[] = {
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyPlayerController_Statics::NewProp_BuildingsClassRef,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyPlayerController_Statics::NewProp_HeightSpawnBuilding,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyPlayerController_Statics::NewProp_BuildingsInWorldArray_Inner,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyPlayerController_Statics::NewProp_BuildingsInWorldArray,
@@ -199,7 +187,7 @@ void EmptyLinkFunctionForGeneratedCodeMyPlayerController() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(AMyPlayerController, 3171927506);
+	IMPLEMENT_CLASS(AMyPlayerController, 1119323753);
 	template<> CITYBUILDING_API UClass* StaticClass<AMyPlayerController>()
 	{
 		return AMyPlayerController::StaticClass();

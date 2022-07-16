@@ -9,7 +9,15 @@
 #include "CityBuilding/Grid/ActorGridCell.h"
 #include "CityBuilding/Setup/MyPlayerController.h"
 
+#include "Components/DecalComponent.h"
 #include "Kismet/GameplayStatics.h"
+
+// Macros to call debug text. Syntax: Colour("My text)
+#define Yellow(x) if(GEngine){GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Yellow, FString::Printf(TEXT(x)));}
+#define Yellow0(x) if(GEngine){GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, TEXT(x));}
+#define Red(x) if(GEngine){GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Red, TEXT(x));}
+#define Blue(x) if(GEngine){GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Blue, TEXT(x));}
+#define Silver(x) if(GEngine){GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Silver, TEXT(x));}
 
 
 // Sets default values
@@ -60,25 +68,12 @@ void ABuildingManager::CheckIfBuildingIsPlaceable(AActorGridCell* ClosestGridCel
 		{
 			// Check in BuildingManager if the corners are road -> prevent  the building to be placed
 			CheckAdjacentRoads(ClosestGridCell, BuildingSpawned);
-			//if (bAdjacentRoads == true)
-			//{
-			//	BuildingSpawned->Mesh->SetMaterial(0, BuildingSpawned->M_Overlap);
-			//	ControllerRef->bCheckIfBuildingIsPlaceable = false;
-			//}
-			//// ... if the corners are NOT road -> place the building
-			//else if (bAdjacentRoads == false)
-			//{
-			//	BuildingSpawned->Mesh->SetMaterial(0, BuildingSpawned->M_Selected);
-			//	ControllerRef->bCheckIfBuildingIsPlaceable = true;
-			//}
 		}
-
 		// IF BUILDING SPAWNED IS A RAIL
 		else if (BuildingSpawned->IsA<ARail>())
 		{
 			CheckAdjacentRails(ClosestGridCell, BuildingSpawned);
 		}
-
 		// IF BUILDING SPAWNED IS OTHER THAN LISTED ABOVE
 		else
 		{
@@ -148,6 +143,37 @@ void ABuildingManager::CheckAdjacentRoads(AActorGridCell* ClosestGridCell, ABuil
 	}
 }
 
+void ABuildingManager::AdjustRoadFeatures(AActorGridCell* ClosestGridCell, ABuildings* BuildingSpawned)
+{
+	NorthNeighbourRoad = Cast<ABuildingRoad>(ClosestGridCell->NeighbourNorth->OccupyingActor);
+	SouthNeighbourRoad = Cast<ABuildingRoad>(ClosestGridCell->NeighbourSouth->OccupyingActor);
+	EastNeighbourRoad = Cast<ABuildingRoad>(ClosestGridCell->NeighbourEast->OccupyingActor);
+	WestNeighbourRoad = Cast<ABuildingRoad>(ClosestGridCell->NeighbourWest->OccupyingActor);
+	// Add neighbouring road actors (if present) into the array
+	/*if (NorthNeighbourRoad)
+	{
+		tNeighbouringRoads.Add(NorthNeighbourRoad);
+	}
+	if (SouthNeighbourRoad)
+	{
+		tNeighbouringRoads.Add(SouthNeighbourRoad);
+	}
+	if (EastNeighbourRoad)
+	{
+		tNeighbouringRoads.Add(EastNeighbourRoad);
+	}
+	if (WestNeighbourRoad)
+	{
+		tNeighbouringRoads.Add(WestNeighbourRoad);
+	}*/
+
+	RoadSpawned = Cast<ABuildingRoad>(BuildingSpawned);
+
+	AdjustRoadWalkways(ClosestGridCell, BuildingSpawned);
+	AdjustRoadline(ClosestGridCell, BuildingSpawned);
+
+}
+
 void ABuildingManager::AdjustRoadWalkways(AActorGridCell* ClosestGridCell, ABuildings* BuildingSpawned)
 {
 	// If there are roads at the diagonals
@@ -156,25 +182,22 @@ void ABuildingManager::AdjustRoadWalkways(AActorGridCell* ClosestGridCell, ABuil
 		ClosestGridCell->NeighbourNorth->OccupyingType == BuildingTypes::Road)
 	{
 		// Hide north pathway of the road spawned
-		ABuildingRoad* RoadSpawned = Cast<ABuildingRoad>(BuildingSpawned);
 		RoadSpawned->PathwayNorth->SetVisibility(false);
 		// Hide south pathway of the northern neighbouring road
-		ABuildingRoad* NorthNeighbourRoad = Cast<ABuildingRoad>(ClosestGridCell->NeighbourNorth->OccupyingActor);
+		NorthNeighbourRoad = Cast<ABuildingRoad>(ClosestGridCell->NeighbourNorth->OccupyingActor);
 		if (NorthNeighbourRoad)
 		{
 			NorthNeighbourRoad->PathwaySouth->SetVisibility(false);
 		}
-
 	}
 	// SOUTH
 	if (ClosestGridCell->OccupyingType == BuildingTypes::Road &&
 		ClosestGridCell->NeighbourSouth->OccupyingType == BuildingTypes::Road)
 	{
 		// Hide south pathway of the road spawned
-		ABuildingRoad* RoadSpawned = Cast<ABuildingRoad>(BuildingSpawned);
 		RoadSpawned->PathwaySouth->SetVisibility(false);
 		// Hide north pathway of the southern neighbouring road
-		ABuildingRoad* SouthNeighbourRoad = Cast<ABuildingRoad>(ClosestGridCell->NeighbourSouth->OccupyingActor);
+		SouthNeighbourRoad = Cast<ABuildingRoad>(ClosestGridCell->NeighbourSouth->OccupyingActor);
 		if (SouthNeighbourRoad)
 		{
 			SouthNeighbourRoad->PathwayNorth->SetVisibility(false);
@@ -185,36 +208,81 @@ void ABuildingManager::AdjustRoadWalkways(AActorGridCell* ClosestGridCell, ABuil
 		ClosestGridCell->NeighbourWest->OccupyingType == BuildingTypes::Road)
 	{
 		// Hide west pathway of the road spawned
-		ABuildingRoad* RoadSpawned = Cast<ABuildingRoad>(BuildingSpawned);
 		RoadSpawned->PathwayWest->SetVisibility(false);
 		// Hide east pathway of the nort western road
-		ABuildingRoad* WestNeighbourRoad = Cast<ABuildingRoad>(ClosestGridCell->NeighbourWest->OccupyingActor);
+		WestNeighbourRoad = Cast<ABuildingRoad>(ClosestGridCell->NeighbourWest->OccupyingActor);
 		if (WestNeighbourRoad)
 		{
 			WestNeighbourRoad->PathwayEast->SetVisibility(false);
-			//WestNeighbourRoad->RoadlineHalfLeft->SetVisibility(true);
 		}
-				 
-		// Adjust roadlines
-		//RoadSpawned->Roadline->SetRelativeRotation(FRotator(0, 0, 0));
-
 	}
 	// EAST
 	if (ClosestGridCell->OccupyingType == BuildingTypes::Road &&
 		ClosestGridCell->NeighbourEast->OccupyingType == BuildingTypes::Road)
 	{
 		// Hide east pathway of the road spawned
-		ABuildingRoad* RoadSpawned = Cast<ABuildingRoad>(BuildingSpawned);
 		RoadSpawned->PathwayEast->SetVisibility(false);
 		// Hide west pathway of the eastern neighbouring road
-		ABuildingRoad* EastNeighbourRoad = Cast<ABuildingRoad>(ClosestGridCell->NeighbourEast->OccupyingActor);
+		EastNeighbourRoad = Cast<ABuildingRoad>(ClosestGridCell->NeighbourEast->OccupyingActor);
 		if (EastNeighbourRoad)
 		{
 			EastNeighbourRoad->PathwayWest->SetVisibility(false);
-			//EastNeighbourRoad->RoadlineHalfRight->SetVisibility(true);
 		}
-		// Adjust roadlines
-		//RoadSpawned->Roadline->SetRelativeRotation(FRotator(0, 0, 0));
+	}
+}
+
+void ABuildingManager::AdjustRoadline(AActorGridCell* ClosestGridCell, ABuildings* BuildingSpawned)
+{
+	//int32 NbrRoadsNeighbour = tNeighbouringRoads.Num();
+	//GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, FString::Printf(TEXT("Nbr neighbouring roads: %d"), NbrRoadsNeighbour));
+
+	// IF NORTH OR SOUTH NEIGHBOUR
+	if (ClosestGridCell->NeighbourSouth->OccupyingType == BuildingTypes::Road ||
+		ClosestGridCell->NeighbourNorth->OccupyingType == BuildingTypes::Road)
+	{
+		// Rotate road sign of the spawned actor...
+		RoadSpawned->Roadline->AddRelativeRotation(FRotator(0, 90, 0));
+		//... and of its neighbour(s)
+		if (NorthNeighbourRoad)
+		{
+			NorthNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 90, 0));
+		}
+		if (SouthNeighbourRoad)
+		{
+			SouthNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 90, 0));
+		}
+	}
+	// IF WEST NEIGHBOUR
+	if (ClosestGridCell->NeighbourWest->OccupyingType == BuildingTypes::Road)
+	{
+		// If West cell has North neighbour, change material
+		if (ClosestGridCell->NeighbourWest->NeighbourNorth->OccupyingType == BuildingTypes::Road)
+		{
+			WestNeighbourRoad->Roadline->SetMaterial(0, WestNeighbourRoad->MRoadlineCurve);
+			WestNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 90));
+		}
+		// If the West cell has a South neighbour, change material
+		if (ClosestGridCell->NeighbourWest->NeighbourSouth->OccupyingType == BuildingTypes::Road)
+		{
+			WestNeighbourRoad->Roadline->SetMaterial(0, WestNeighbourRoad->MRoadlineCurve);
+			WestNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, -90));
+		}
+	}
+	// IF EAST MEIGHBOUR
+	if (ClosestGridCell->NeighbourEast->OccupyingType == BuildingTypes::Road)
+	{
+		// If the East cell has a North neighbour, change material
+		if (ClosestGridCell->NeighbourEast->NeighbourNorth->OccupyingType == BuildingTypes::Road)
+		{
+			EastNeighbourRoad->Roadline->SetMaterial(0, EastNeighbourRoad->MRoadlineCurve);
+			EastNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 90));
+		}
+		// If the East cell has a South neighbour, change material
+		if (ClosestGridCell->NeighbourEast->NeighbourSouth->OccupyingType == BuildingTypes::Road)
+		{
+			EastNeighbourRoad->Roadline->SetMaterial(0, EastNeighbourRoad->MRoadlineCurve);
+			EastNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, -90));
+		}
 	}
 }
 
@@ -258,6 +326,7 @@ void ABuildingManager::CheckAdjacentRails(AActorGridCell* ClosestGridCell, ABuil
 	}
 
 }
+
 void ABuildingManager::AdjustRailDirection(AActorGridCell* ClosestGridCell, ABuildings* BuildingSpawned)
 {
 	ARail* RailSpawned = Cast<ARail>(BuildingSpawned);
@@ -283,13 +352,13 @@ void ABuildingManager::UpdateBuildingManagerDT()
 
 	// Source - calling data table
 	static const FString ContextString(TEXT("Context string"));
-	FBuildingManagerStruct* AttackMontage = BuildingManagerDT->FindRow<FBuildingManagerStruct>(FName(TEXT("NewRow")), ContextString, true);
-	if (AttackMontage)
+	FBuildingManagerStruct* BuildManageStruct = BuildingManagerDT->FindRow<FBuildingManagerStruct>(FName(TEXT("NewRow")), ContextString, true);
+	if (BuildManageStruct)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, FString::Printf(TEXT("BuildingName: %s"), *AttackMontage->BuildingName));
-		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, FString::Printf(TEXT("IndexGridCell: %d"), AttackMontage->IndexGridCell));
-		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, FString::Printf(TEXT("IndexBuildingWorld: %d"), AttackMontage->IndexBuildingInWorld));
-		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, FString::Printf(TEXT("BuildingLocation: %s"), *AttackMontage->BuildingLocation.ToString()));
+		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, FString::Printf(TEXT("BuildingName: %s"), *BuildManageStruct->BuildingName));
+		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, FString::Printf(TEXT("IndexGridCell: %d"), BuildManageStruct->IndexGridCell));
+		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, FString::Printf(TEXT("IndexBuildingWorld: %d"), BuildManageStruct->IndexBuildingInWorld));
+		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, FString::Printf(TEXT("BuildingLocation: %s"), *BuildManageStruct->BuildingLocation.ToString()));
 	}
 }
 
