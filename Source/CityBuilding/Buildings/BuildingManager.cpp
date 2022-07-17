@@ -233,11 +233,14 @@ void ABuildingManager::AdjustRoadWalkways(AActorGridCell* ClosestGridCell, ABuil
 
 void ABuildingManager::AdjustRoadline(AActorGridCell* ClosestGridCell, ABuildings* BuildingSpawned)
 {
-	/* ROTATION SCHEMES FOR ROADLINES DECAL
-							 3 NEIGHBOURS:                         2 NEIGHBOURS:
-   Rotation angle:           270°:     180°:      90°:      0°     |    270°:      180°:       90°:      0°:
-   Scheme neighbour cells:    xxx       x           x        x     |     xx         xx           x        x
-							   x        xx         xxx      xx     |     x           x          xx        xx
+	/* ROTATION SCHEMES FOR ROADLINES DECAL - SetWorldRotation()
+	---------------------------------------------------------------------------------------------------------------------------
+	|							 3 ROADLINES:                                    2 ROADLINES:								  |
+	|   Rotation angle (P,Y,R):  (90,0,0)   (90,270,0)    (90,180,0)   (90,90,0)  |    270°:      180°:       90°:      0°:   |
+	|   Scheme neighbour cells:    xxx          x             x            x      |     xx         xx           x        x    |
+	|							   x           xx           xxx          xx      |     x           x          xx        xx    |
+	|										   x                          x                                                   |
+	-------------------------------------------------------------------------------------------------------------------------
     */
 
 
@@ -436,7 +439,7 @@ void ABuildingManager::AdjustRoadline(AActorGridCell* ClosestGridCell, ABuilding
 			ClosestGridCell->NeighbourWest->NeighbourWest->OccupyingType == BuildingTypes::Road)
 		{
 			WestNeighbourRoad->Roadline->SetMaterial(0, WestNeighbourRoad->MFourLines);
-			WestNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 180));
+			//WestNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 180));
 			return;
 		}
 		// 2 NEIGHBOURS
@@ -445,7 +448,8 @@ void ABuildingManager::AdjustRoadline(AActorGridCell* ClosestGridCell, ABuilding
 			ClosestGridCell->NeighbourWest->NeighbourSouth->OccupyingType == BuildingTypes::Road)
 		{
 			WestNeighbourRoad->Roadline->SetMaterial(0, WestNeighbourRoad->MThreeLines);
-			WestNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 180));
+			WestNeighbourRoad->Roadline->SetWorldRotation(FRotator(90, 270, 0));
+
 			return;
 		}
 		// If West cell has West & South neighbour, change material
@@ -453,8 +457,7 @@ void ABuildingManager::AdjustRoadline(AActorGridCell* ClosestGridCell, ABuilding
 			ClosestGridCell->NeighbourWest->NeighbourSouth->OccupyingType == BuildingTypes::Road)
 		{
 			WestNeighbourRoad->Roadline->SetMaterial(0, WestNeighbourRoad->MThreeLines);
-			//WestNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 270));
-			WestNeighbourRoad->Roadline->SetWorldRotation(FRotator(90, 0, 0));
+			WestNeighbourRoad->Roadline->SetWorldRotation(FRotator(90, 0, 0)); //(pitch, yaw, roll) 
 			return;
 		}
 		// If West cell has North & West neighbour, change material
@@ -462,8 +465,7 @@ void ABuildingManager::AdjustRoadline(AActorGridCell* ClosestGridCell, ABuilding
 			ClosestGridCell->NeighbourWest->NeighbourWest->OccupyingType == BuildingTypes::Road)
 		{
 			WestNeighbourRoad->Roadline->SetMaterial(0, WestNeighbourRoad->MThreeLines);
-			//WestNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 90));
-			WestNeighbourRoad->Roadline->SetWorldRotation(FRotator(270, 0, 0));
+			WestNeighbourRoad->Roadline->SetWorldRotation(FRotator(90, 180, 0));
 			return;
 		}
 		// 1 NEIGHBOUR
@@ -540,7 +542,8 @@ void ABuildingManager::AdjustRoadline(AActorGridCell* ClosestGridCell, ABuilding
 	if (ClosestGridCell->NeighbourNorth->OccupyingType == BuildingTypes::Road)
 	{
 		// Rotate road sign of the spawned actor (because North)
-		RoadSpawned->Roadline->AddRelativeRotation(FRotator(0, 90, 0));
+		//RoadSpawned->Roadline->AddRelativeRotation(FRotator(0, 90, 0));
+		RoadSpawned->Roadline->SetWorldRotation(FRotator(0, 90, 0));
 		
 		// NORTH NEIGHBOUR WITH 3 neighbours
 		// If North cell has North, East and West neighbour, change material to Four lines
