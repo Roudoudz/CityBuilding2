@@ -1,0 +1,39 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UE4Editor-CityBuilding-0102.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\CityBuildingEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
+"E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Development\CityBuilding\BuildingManager.cpp.obj"
+"E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Development\CityBuilding\BuildingRoad.cpp.obj"
+"E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Development\CityBuilding\Buildings.cpp.obj"
+"E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Development\CityBuilding\Rail.cpp.obj"
+"E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Development\CityBuilding\CameraMovementComponent.cpp.obj"
+"E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Development\CityBuilding\ClickHighlightComp.cpp.obj"
+"E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Development\CityBuilding\ActorGridCell.cpp.obj"
+"E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Development\CityBuilding\GridManager.cpp.obj"
+"E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Development\CityBuilding\CameraPawnRTS.cpp.obj"
+"E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Development\CityBuilding\CityBuilding.cpp.obj"
+"E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Development\CityBuilding\MyGameMode.cpp.obj"
+"E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Development\CityBuilding\MyPlayerController.cpp.obj"
+"E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Development\CityBuilding\MyUserWidget.cpp.obj"
+"E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Development\CityBuilding\PostProcVol.cpp.obj"
+"E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Development\CityBuilding\ActorGridCell.gen.cpp.obj"
+"E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Development\CityBuilding\BuildingManager.gen.cpp.obj"
+"E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Development\CityBuilding\BuildingRoad.gen.cpp.obj"
+"E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Development\CityBuilding\Buildings.gen.cpp.obj"
+"E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Development\CityBuilding\CameraMovementComponent.gen.cpp.obj"
+"E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Development\CityBuilding\CameraPawnRTS.gen.cpp.obj"
+"E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Development\CityBuilding\CityBuilding.init.gen.cpp.obj"
+"E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Development\CityBuilding\ClickHighlightComp.gen.cpp.obj"
+"E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Development\CityBuilding\GridManager.gen.cpp.obj"
+"E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Development\CityBuilding\MyGameMode.gen.cpp.obj"
+"E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Development\CityBuilding\MyPlayerController.gen.cpp.obj"
+"E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Development\CityBuilding\MyUserWidget.gen.cpp.obj"
+"E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Development\CityBuilding\PostProcVol.gen.cpp.obj"
+"E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Development\CityBuilding\Rail.gen.cpp.obj"
+"E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Development\CityBuilding\Default.rc2.res"
+/OUT:"E:\UE4 PROJECTS\City Building\CityBuilding\Intermediate\Build\Win64\UE4Editor\Development\CityBuilding\UE4Editor-CityBuilding-0102.lib"
