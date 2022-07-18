@@ -262,501 +262,157 @@ void ABuildingManager::AdjustRoadWalkways(AActorGridCell* ClosestGridCell, ABuil
 
 void ABuildingManager::AdjustRoadline(AActorGridCell* ClosestGridCell, ABuildings* BuildingSpawned)
 {
+	/* ROTATION SCHEMES FOR ROADLINES DECAL - SetWorldRotation()
+	------------------------------------------------------------------------------------------------------------------------------
+	|							 3 ROADLINES:                                                   2 ROADLINES:				     |
+	|   Rotation angle (P,Y,R):  (90,0,0)   (90,270,0)    (90,180,0)   (90,90,0)  |  (90,90,0)  (90,180,0)  (90,270,0) (90,0,0)  |
+	|   Scheme neighbour cells:   xxx          x             x            x       |     xx         xx           x         x      |
+	|							   x           xx           xxx          xx       |     x           x          xx         xx     |
+	|										   x                          x                                                      |
+	------------------------------------------------------------------------------------------------------------------------------
+	*/
+
+
 	// Check each AGridCell (with occupying actor of type ABuildingRoad) in the array tNeighbouringRoads and adjust roadlines
 	for (AActorGridCell* IndexGridCells : tNeighbouringGridCells)
 	{
 		ABuildingRoad* IndexRoad = Cast<ABuildingRoad>(IndexGridCells->OccupyingActor);
 		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, FString::Printf(TEXT("Number neighbouring roads: %s"), *IndexRoad->GetActorLabel()));
 
-			if (IndexGridCells->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
-				IndexGridCells->NeighbourSouth->OccupyingType == BuildingTypes::Road &&
-				IndexGridCells->NeighbourEast->OccupyingType == BuildingTypes::Road &&
-				IndexGridCells->NeighbourWest->OccupyingType == BuildingTypes::Road)
-			{
-				Blue("4 lines");
-				IndexRoad->Roadline->SetMaterial(0, RoadSpawned->MFourLines);
-				continue;
-			}
-			
+		/*	IF A ROAD HAS 4 NEIGHBOURS */
+		if (IndexGridCells->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
+			IndexGridCells->NeighbourSouth->OccupyingType == BuildingTypes::Road &&
+			IndexGridCells->NeighbourEast->OccupyingType == BuildingTypes::Road &&
+			IndexGridCells->NeighbourWest->OccupyingType == BuildingTypes::Road)
+		{
+			IndexRoad->Roadline->SetMaterial(0, RoadSpawned->MFourLines);
+			continue;
+		}
 		
 		/*	IF A ROAD HAS 3 NEIGHBOURS */
 		// North, East, West neighbours
-			if (IndexGridCells->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
-				IndexGridCells->NeighbourWest->OccupyingType == BuildingTypes::Road &&
-				IndexGridCells->NeighbourEast->OccupyingType == BuildingTypes::Road)
-			{
-				Blue("3 lines - N,E,W");
-				IndexRoad->Roadline->SetMaterial(0, RoadSpawned->MThreeLines);
-				IndexRoad->Roadline->SetWorldRotation(FRotator(90, 180, 0));
-				continue;
-			}
-			// South, East, West neighbours
-			else if (IndexGridCells->NeighbourSouth->OccupyingType == BuildingTypes::Road &&
-				IndexGridCells->NeighbourWest->OccupyingType == BuildingTypes::Road &&
-				IndexGridCells->NeighbourEast->OccupyingType == BuildingTypes::Road)
-			{
-				Blue("3 lines - S,E,W");
-				IndexRoad->Roadline->SetMaterial(0, RoadSpawned->MThreeLines);
-				IndexRoad->Roadline->SetWorldRotation(FRotator(90, 0, 0));
-				continue;
-			}
-			// North, South, East neighbours
-			else if (IndexGridCells->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
-				IndexGridCells->NeighbourSouth->OccupyingType == BuildingTypes::Road &&
-				IndexGridCells->NeighbourEast->OccupyingType == BuildingTypes::Road)
-			{
-				Blue("3 lines - N,E,S");
-				IndexRoad->Roadline->SetMaterial(0, RoadSpawned->MThreeLines);
-				IndexRoad->Roadline->SetWorldRotation(FRotator(90, 270, 0));
-				continue;
-			}
-			// North, South, West neighbours
-			else if (IndexGridCells->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
-				IndexGridCells->NeighbourSouth->OccupyingType == BuildingTypes::Road &&
-				IndexGridCells->NeighbourWest->OccupyingType == BuildingTypes::Road)
-			{
-				Blue("3 lines - N,S,W");
-				IndexRoad->Roadline->SetMaterial(0, RoadSpawned->MThreeLines);
-				IndexRoad->Roadline->SetWorldRotation(FRotator(90, 90, 0));
-				continue;
-			}
-	}
-}
-
-void ABuildingManager::AdjustRoadline_Old(AActorGridCell* ClosestGridCell, ABuildings* BuildingSpawned)
-{
-	/* ROTATION SCHEMES FOR ROADLINES DECAL - SetWorldRotation()
-	---------------------------------------------------------------------------------------------------------------------------
-	|							 3 ROADLINES:                                    2 ROADLINES:								  |
-	|   Rotation angle (P,Y,R):  (90,0,0)   (90,270,0)    (90,180,0)   (90,90,0)  |    270°:      180°:       90°:      0°:   |
-	|   Scheme neighbour cells:    xxx          x             x            x      |     xx         xx           x        x    |
-	|							   x           xx           xxx          xx      |     x           x          xx        xx    |
-	|										   x                          x                                                   |
-	-------------------------------------------------------------------------------------------------------------------------
-    */
-
-
-	/*	SPAWNED BUILDING HAS 4 NEIGHBOURS */
-	if (ClosestGridCell->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
-		ClosestGridCell->NeighbourSouth->OccupyingType == BuildingTypes::Road &&
-		ClosestGridCell->NeighbourEast->OccupyingType == BuildingTypes::Road &&
-		ClosestGridCell->NeighbourWest->OccupyingType == BuildingTypes::Road)
-	{
-		RoadSpawned->Roadline->SetMaterial(0, RoadSpawned->MFourLines);
-		return;
-	}
-
-	/*	SPAWNED BUILDING HAS 3 NEIGHBOURS */
-	// North, East, West
-	if (ClosestGridCell->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
-		ClosestGridCell->NeighbourWest->OccupyingType == BuildingTypes::Road &&
-		ClosestGridCell->NeighbourEast->OccupyingType == BuildingTypes::Road )
-	{
-		RoadSpawned->Roadline->SetMaterial(0, RoadSpawned->MThreeLines);
-		RoadSpawned->Roadline->AddRelativeRotation(FRotator(0, 0, 90));
-		return;
-	}
-	// South, East, West
-	if (ClosestGridCell->NeighbourSouth->OccupyingType == BuildingTypes::Road &&
-		ClosestGridCell->NeighbourWest->OccupyingType == BuildingTypes::Road &&
-		ClosestGridCell->NeighbourEast->OccupyingType == BuildingTypes::Road)
-	{
-		RoadSpawned->Roadline->SetMaterial(0, RoadSpawned->MThreeLines);
-		RoadSpawned->Roadline->AddRelativeRotation(FRotator(0, 0, 270));
-		return;
-	}
-	// North, South, East
-	if (ClosestGridCell->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
-		ClosestGridCell->NeighbourSouth->OccupyingType == BuildingTypes::Road &&
-		ClosestGridCell->NeighbourEast->OccupyingType == BuildingTypes::Road)
-	{
-		RoadSpawned->Roadline->SetMaterial(0, RoadSpawned->MThreeLines);
-		RoadSpawned->Roadline->AddRelativeRotation(FRotator(0, 0, 180));
-		return;
-	}
-	// North, South, West
-	if (ClosestGridCell->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
-		ClosestGridCell->NeighbourSouth->OccupyingType == BuildingTypes::Road &&
-		ClosestGridCell->NeighbourWest->OccupyingType == BuildingTypes::Road)
-	{
-		RoadSpawned->Roadline->SetMaterial(0, RoadSpawned->MThreeLines);
-		RoadSpawned->Roadline->AddRelativeRotation(FRotator(0, 0, 0));
-		return;
-	}
-
-	/*	SPAWNED BUILDING HAS 2 NEIGHBOURS */
-	// If Spawned building has North & South neighbours, rotate
-	if (ClosestGridCell->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
-		ClosestGridCell->NeighbourSouth->OccupyingType == BuildingTypes::Road)
-	{
-		RoadSpawned->Roadline->AddRelativeRotation(FRotator(0, 0, 90));
-
-		// If North neighbour has East neighbour AND South neighbour has East neighbour
-		if (ClosestGridCell->NeighbourNorth->NeighbourEast->OccupyingType == BuildingTypes::Road &&
-			ClosestGridCell->NeighbourSouth->NeighbourEast->OccupyingType == BuildingTypes::Road)
+		else if (IndexGridCells->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
+			IndexGridCells->NeighbourWest->OccupyingType == BuildingTypes::Road &&
+			IndexGridCells->NeighbourEast->OccupyingType == BuildingTypes::Road)
 		{
-			RoadSpawned->Roadline->AddRelativeRotation(FRotator(0, 90, 0));
-
-			NorthNeighbourRoad->Roadline->SetMaterial(0, NorthNeighbourRoad->MRoadlineCurve);
-			NorthNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 270));
-			SouthNeighbourRoad->Roadline->SetMaterial(0, NorthNeighbourRoad->MRoadlineCurve);
-			SouthNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 0));
-			return;
-		} 
-		// If North has neighbour West AND south has neighbour West
-		if (ClosestGridCell->NeighbourNorth->NeighbourWest->OccupyingType == BuildingTypes::Road &&
-			ClosestGridCell->NeighbourSouth->NeighbourWest->OccupyingType == BuildingTypes::Road)
-		{
-			RoadSpawned->Roadline->AddRelativeRotation(FRotator(0, 90, 0));
-
-			NorthNeighbourRoad->Roadline->SetMaterial(0, NorthNeighbourRoad->MRoadlineCurve);
-			NorthNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 180));
-			SouthNeighbourRoad->Roadline->SetMaterial(0, NorthNeighbourRoad->MRoadlineCurve);
-			SouthNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 90));
-			return;
+			Blue("3 lines - N,E,W");
+			IndexRoad->Roadline->SetMaterial(0, RoadSpawned->MThreeLines);
+			IndexRoad->Roadline->SetWorldRotation(FRotator(90, 180, 0));
+			continue;
 		}
-	}
-	//If building spawned with neighbour North & East
-	if (ClosestGridCell->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
-		ClosestGridCell->NeighbourEast->OccupyingType == BuildingTypes::Road)
-	{
-		RoadSpawned->Roadline->SetMaterial(0, RoadSpawned->MRoadlineCurve);
-		RoadSpawned->Roadline->AddRelativeRotation(FRotator(0, 0, 90));
-		return;
-	}
-	//If building spawned with neighbour North & West
-	if (ClosestGridCell->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
-		ClosestGridCell->NeighbourWest->OccupyingType == BuildingTypes::Road)
-	{
-		RoadSpawned->Roadline->SetMaterial(0, RoadSpawned->MRoadlineCurve);
-		RoadSpawned->Roadline->AddRelativeRotation(FRotator(0, 0, 0));
-		return;
-	}
-	//If building spawned with neighbour South & East
-	if (ClosestGridCell->NeighbourSouth->OccupyingType == BuildingTypes::Road &&
-		ClosestGridCell->NeighbourEast->OccupyingType == BuildingTypes::Road)
-	{
-		RoadSpawned->Roadline->SetMaterial(0, RoadSpawned->MRoadlineCurve);
-		RoadSpawned->Roadline->AddRelativeRotation(FRotator(0, 0, 270));
-		return;
-	}
-	//If building spawned with neighbour South & West
-	if (ClosestGridCell->NeighbourSouth->OccupyingType == BuildingTypes::Road &&
-		ClosestGridCell->NeighbourWest->OccupyingType == BuildingTypes::Road)
-	{
-		RoadSpawned->Roadline->SetMaterial(0, RoadSpawned->MRoadlineCurve);
-		RoadSpawned->Roadline->AddRelativeRotation(FRotator(0, 0, 180));
-		return;
-	}
-
-	//If building spawned with neighbour East & West, DO NOT ROTATE
-	if (ClosestGridCell->NeighbourWest->OccupyingType == BuildingTypes::Road &&
-		ClosestGridCell->NeighbourEast->OccupyingType == BuildingTypes::Road)
-	{
-		// IF EAST NEIGHBOUR HAS 3 NEIGHBOURS
-		if (ClosestGridCell->NeighbourEast->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
-			ClosestGridCell->NeighbourEast->NeighbourSouth->OccupyingType == BuildingTypes::Road &&
-			ClosestGridCell->NeighbourEast->NeighbourEast->OccupyingType == BuildingTypes::Road)
+		// South, East, West neighbours
+		else if (IndexGridCells->NeighbourSouth->OccupyingType == BuildingTypes::Road &&
+			IndexGridCells->NeighbourWest->OccupyingType == BuildingTypes::Road &&
+			IndexGridCells->NeighbourEast->OccupyingType == BuildingTypes::Road)
 		{
-			EastNeighbourRoad->Roadline->SetMaterial(0, EastNeighbourRoad->MFourLines);
-			EastNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 90));
-			return;
+			Blue("3 lines - S,E,W");
+			IndexRoad->Roadline->SetMaterial(0, RoadSpawned->MThreeLines);
+			IndexRoad->Roadline->SetWorldRotation(FRotator(90, 0, 0));
+			continue;
+		}
+		// North, South, East neighbours
+		else if (IndexGridCells->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
+			IndexGridCells->NeighbourSouth->OccupyingType == BuildingTypes::Road &&
+			IndexGridCells->NeighbourEast->OccupyingType == BuildingTypes::Road)
+		{
+			Blue("3 lines - N,E,S");
+			IndexRoad->Roadline->SetMaterial(0, RoadSpawned->MThreeLines);
+			IndexRoad->Roadline->SetWorldRotation(FRotator(90, 270, 0));
+			continue;
+		}
+		// North, South, West neighbours
+		else if (IndexGridCells->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
+			IndexGridCells->NeighbourSouth->OccupyingType == BuildingTypes::Road &&
+			IndexGridCells->NeighbourWest->OccupyingType == BuildingTypes::Road)
+		{
+			Blue("3 lines - N,S,W");
+			IndexRoad->Roadline->SetMaterial(0, RoadSpawned->MThreeLines);
+			IndexRoad->Roadline->SetWorldRotation(FRotator(90, 90, 0));
+			continue;
 		}
 
-		// IF EAST NEIGHBOUR HAS 2 NEIGHBOURS
-		// If East neighbour has North neighbour AND west neighbour has North neighbour
-		if (ClosestGridCell->NeighbourEast->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
-			ClosestGridCell->NeighbourWest->NeighbourNorth->OccupyingType == BuildingTypes::Road)
+		/*	IF A ROAD HAS 2 NEIGHBOURS */
+		// NORTH & SOUTH (->rotate)
+		else if (IndexGridCells->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
+			IndexGridCells->NeighbourSouth->OccupyingType == BuildingTypes::Road)
 		{
-			EastNeighbourRoad->Roadline->SetMaterial(0, EastNeighbourRoad->MRoadlineCurve);
-			EastNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 180)); // should be 90
-			WestNeighbourRoad->Roadline->SetMaterial(0, WestNeighbourRoad->MRoadlineCurve);
-			WestNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 90)); // should be 0
-
-			return;
+			Blue("2 lines - N,S");
+			IndexRoad->Roadline->SetMaterial(0, RoadSpawned->MRoadlineStraight);
+			IndexRoad->Roadline->SetWorldRotation(FRotator(90, 90, 0));
+			continue;
+		}
+		// NORTH & EAST
+		else if (IndexGridCells->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
+			IndexGridCells->NeighbourEast->OccupyingType == BuildingTypes::Road)
+		{
+			Blue("2 lines - N,E");
+			IndexRoad->Roadline->SetMaterial(0, RoadSpawned->MRoadlineCurve);
+			IndexRoad->Roadline->SetWorldRotation(FRotator(90, 0, 0));
+			continue;
+		}
+		// NORTH & WEST
+		else if (IndexGridCells->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
+			IndexGridCells->NeighbourWest->OccupyingType == BuildingTypes::Road)
+		{
+			Blue("2 lines - N,W");
+			IndexRoad->Roadline->SetMaterial(0, RoadSpawned->MRoadlineCurve);
+			IndexRoad->Roadline->SetWorldRotation(FRotator(90, 270, 0));
+			continue;
+		}
+		// SOUTH & EAST
+		else if (IndexGridCells->NeighbourSouth->OccupyingType == BuildingTypes::Road &&
+			IndexGridCells->NeighbourEast->OccupyingType == BuildingTypes::Road)
+		{
+			Blue("2 lines - S,E");
+			IndexRoad->Roadline->SetMaterial(0, RoadSpawned->MRoadlineCurve);
+			IndexRoad->Roadline->SetWorldRotation(FRotator(90, 90, 0));
+			continue;
+		}
+		// SOUTH & WEST
+		else if (IndexGridCells->NeighbourSouth->OccupyingType == BuildingTypes::Road &&
+			IndexGridCells->NeighbourWest->OccupyingType == BuildingTypes::Road)
+		{
+			Blue("2 lines - S,W");
+			IndexRoad->Roadline->SetMaterial(0, RoadSpawned->MRoadlineCurve);
+			IndexRoad->Roadline->SetWorldRotation(FRotator(90, 180, 0));
+			continue;
+		}
+		// EAST & WEST (-> DO NOT ROTATE)
+		else if (IndexGridCells->NeighbourWest->OccupyingType == BuildingTypes::Road &&
+			IndexGridCells->NeighbourEast->OccupyingType == BuildingTypes::Road)
+		{
+			Blue("2 lines - E,W");
+			continue;
 		}
 
-		// If East neighbour has North neighbour AND west neighbour has North neighbour
-		if (ClosestGridCell->NeighbourEast->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
-			ClosestGridCell->NeighbourWest->NeighbourNorth->OccupyingType == BuildingTypes::Road)
+		/*	IF A ROAD HAS 1 NEIGHBOUR */
+		// NORTH OR SOUTH (-> rotate)
+		else if (IndexGridCells->NeighbourNorth->OccupyingType == BuildingTypes::Road ||
+		IndexGridCells->NeighbourSouth->OccupyingType == BuildingTypes::Road)
 		{
-			EastNeighbourRoad->Roadline->SetMaterial(0, EastNeighbourRoad->MRoadlineCurve);
-			EastNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 90));
-			WestNeighbourRoad->Roadline->SetMaterial(0, WestNeighbourRoad->MRoadlineCurve);
-			WestNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 0));
-
-			return;
+			Blue("1 line - N or S");
+			IndexRoad->Roadline->SetMaterial(0, RoadSpawned->MRoadlineStraight);
+			IndexRoad->Roadline->SetWorldRotation(FRotator(90, 90, 0));
+			continue;
 		}
-		// If East neighbour has North neighbour AND west neighbour has South neighbour
-		if (ClosestGridCell->NeighbourEast->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
-			ClosestGridCell->NeighbourWest->NeighbourSouth->OccupyingType == BuildingTypes::Road)
+		/*else if (IndexGridCells->NeighbourSouth->OccupyingType == BuildingTypes::Road)
 		{
-			EastNeighbourRoad->Roadline->SetMaterial(0, EastNeighbourRoad->MRoadlineCurve);
-			EastNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 90));
-			WestNeighbourRoad->Roadline->SetMaterial(0, WestNeighbourRoad->MRoadlineCurve);
-			WestNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 270));
-
-			return;
-		}
-		// If East neighbour has South neighbour AND west neighbour has South neighbour
-		if (ClosestGridCell->NeighbourEast->NeighbourSouth->OccupyingType == BuildingTypes::Road &&
-			ClosestGridCell->NeighbourWest->NeighbourSouth->OccupyingType == BuildingTypes::Road)
+			Blue("1 line - N or S");
+			IndexRoad->Roadline->SetMaterial(0, RoadSpawned->MRoadlineStraight);
+			IndexRoad->Roadline->SetWorldRotation(FRotator(90, 90, 0));
+			continue;
+		}*/
+		// EAST OR WEST (-> DO NOT rotate)
+		else if (IndexGridCells->NeighbourEast->OccupyingType == BuildingTypes::Road ||
+			IndexGridCells->NeighbourWest->OccupyingType == BuildingTypes::Road)
 		{
-			EastNeighbourRoad->Roadline->SetMaterial(0, EastNeighbourRoad->MRoadlineCurve);
-			EastNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 270)); //????? Should be 180
-			WestNeighbourRoad->Roadline->SetMaterial(0, WestNeighbourRoad->MRoadlineCurve);
-			WestNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 0)); //???? should be 270
-			return;
-		}
-		// If East neighbour has South neighbour AND west neighbour has North neighbour
-		if (ClosestGridCell->NeighbourEast->NeighbourSouth->OccupyingType == BuildingTypes::Road &&
-			ClosestGridCell->NeighbourWest->NeighbourNorth->OccupyingType == BuildingTypes::Road)
-		{
-			EastNeighbourRoad->Roadline->SetMaterial(0, EastNeighbourRoad->MRoadlineCurve);
-			EastNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 180));
-			WestNeighbourRoad->Roadline->SetMaterial(0, WestNeighbourRoad->MRoadlineCurve);
-			WestNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 0));
-			return;
-		}
-	}
-
-	///// SPAWNED BUILDING HAS 1 NEIGHBOUR
-	// WEST NEIGHBOUR
-	if (ClosestGridCell->NeighbourWest->OccupyingType == BuildingTypes::Road)
-	{
-		// 3 NEIGHBOURS
-		// If West cell has North, South and West neighbour, change material to Four lines
-		if (ClosestGridCell->NeighbourWest->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
-			ClosestGridCell->NeighbourWest->NeighbourSouth->OccupyingType == BuildingTypes::Road &&
-			ClosestGridCell->NeighbourWest->NeighbourWest->OccupyingType == BuildingTypes::Road)
-		{
-			WestNeighbourRoad->Roadline->SetMaterial(0, WestNeighbourRoad->MFourLines);
-			//WestNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 180));
-			return;
-		}
-		// 2 NEIGHBOURS
-		// If West cell has North & South neighbour, change material
-		if (ClosestGridCell->NeighbourWest->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
-			ClosestGridCell->NeighbourWest->NeighbourSouth->OccupyingType == BuildingTypes::Road)
-		{
-			WestNeighbourRoad->Roadline->SetMaterial(0, WestNeighbourRoad->MThreeLines);
-			WestNeighbourRoad->Roadline->SetWorldRotation(FRotator(90, 270, 0));
-
-			return;
-		}
-		// If West cell has West & South neighbour, change material
-		if (ClosestGridCell->NeighbourWest->NeighbourWest->OccupyingType == BuildingTypes::Road &&
-			ClosestGridCell->NeighbourWest->NeighbourSouth->OccupyingType == BuildingTypes::Road)
-		{
-			WestNeighbourRoad->Roadline->SetMaterial(0, WestNeighbourRoad->MThreeLines);
-			WestNeighbourRoad->Roadline->SetWorldRotation(FRotator(90, 0, 0)); //(pitch, yaw, roll) 
-			return;
-		}
-		// If West cell has North & West neighbour, change material
-		if (ClosestGridCell->NeighbourWest->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
-			ClosestGridCell->NeighbourWest->NeighbourWest->OccupyingType == BuildingTypes::Road)
-		{
-			WestNeighbourRoad->Roadline->SetMaterial(0, WestNeighbourRoad->MThreeLines);
-			WestNeighbourRoad->Roadline->SetWorldRotation(FRotator(90, 180, 0));
-			return;
-		}
-		// 1 NEIGHBOUR
-		// If West cell has North neighbour, change material
-		if (ClosestGridCell->NeighbourWest->NeighbourNorth->OccupyingType == BuildingTypes::Road)
-		{
-			WestNeighbourRoad->Roadline->SetMaterial(0, WestNeighbourRoad->MRoadlineCurve);
-			WestNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 90));
-			return;
-		}
-		// If the West cell has a South neighbour, change material
-		if (ClosestGridCell->NeighbourWest->NeighbourSouth->OccupyingType == BuildingTypes::Road)
-		{
-			WestNeighbourRoad->Roadline->SetMaterial(0, WestNeighbourRoad->MRoadlineCurve);
-			WestNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 0));
-			return;
-		}
-	}
-	// EAST NEIGHBOUR
-	if (ClosestGridCell->NeighbourEast->OccupyingType == BuildingTypes::Road)
-	{
-		// 3 NEIGHBOURS
-		// If East cell has North, South and East neighbour, change material to Four lines
-		if (ClosestGridCell->NeighbourEast->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
-			ClosestGridCell->NeighbourEast->NeighbourSouth->OccupyingType == BuildingTypes::Road &&
-			ClosestGridCell->NeighbourEast->NeighbourEast->OccupyingType == BuildingTypes::Road)
-		{
-			EastNeighbourRoad->Roadline->SetMaterial(0, EastNeighbourRoad->MFourLines);
-			EastNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 180));
-			return;
-		}
-		// 2 NEIGHBOURS
-		// If EAST cell has North & South neighbour, change material of EAST neighbour
-		if (ClosestGridCell->NeighbourEast->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
-			ClosestGridCell->NeighbourEast->NeighbourSouth->OccupyingType == BuildingTypes::Road)
-		{
-			EastNeighbourRoad->Roadline->SetMaterial(0, EastNeighbourRoad->MThreeLines);
-			EastNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 0)); 
-			return;
-		}
-		// If EAST cell has East & South neighbour, change material of EAST neighbour
-		if (ClosestGridCell->NeighbourEast->NeighbourEast->OccupyingType == BuildingTypes::Road &&
-			ClosestGridCell->NeighbourEast->NeighbourSouth->OccupyingType == BuildingTypes::Road)
-		{
-			EastNeighbourRoad->Roadline->SetMaterial(0, EastNeighbourRoad->MThreeLines);
-			EastNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 0)); //???? should be 270
-			return;
-		}
-		// If EAST cell has East & North neighbour, change material of EAST neighbour
-		if (ClosestGridCell->NeighbourEast->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
-			ClosestGridCell->NeighbourEast->NeighbourEast->OccupyingType == BuildingTypes::Road)
-		{
-			EastNeighbourRoad->Roadline->SetMaterial(0, EastNeighbourRoad->MThreeLines);
-			EastNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 180)); //????should be 90
-			return;
-		}
-		// 1 NEIGHBOUR
-		// If the East cell has a North neighbour, change material of EAST neighbour
-		if (ClosestGridCell->NeighbourEast->NeighbourNorth->OccupyingType == BuildingTypes::Road)
-		{
-			EastNeighbourRoad->Roadline->SetMaterial(0, EastNeighbourRoad->MRoadlineCurve);
-			EastNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 180));
-			return;
-		}
-		// If the East cell has a South neighbour, change material of EAST neighbour
-		if (ClosestGridCell->NeighbourEast->NeighbourSouth->OccupyingType == BuildingTypes::Road)
-		{
-			EastNeighbourRoad->Roadline->SetMaterial(0, EastNeighbourRoad->MRoadlineCurve);
-			EastNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 270));
-			return;
-		}
-	}
-	// NORTH NEIGHBOUR
-	if (ClosestGridCell->NeighbourNorth->OccupyingType == BuildingTypes::Road)
-	{
-		// Rotate road sign of the spawned actor (because North)
-		//RoadSpawned->Roadline->AddRelativeRotation(FRotator(0, 90, 0));
-		RoadSpawned->Roadline->SetWorldRotation(FRotator(0, 90, 0));
-		
-		// NORTH NEIGHBOUR WITH 3 neighbours
-		// If North cell has North, East and West neighbour, change material to Four lines
-		if (ClosestGridCell->NeighbourNorth->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
-			ClosestGridCell->NeighbourNorth->NeighbourWest->OccupyingType == BuildingTypes::Road &&
-			ClosestGridCell->NeighbourNorth->NeighbourEast->OccupyingType == BuildingTypes::Road)
-		{
-			NorthNeighbourRoad->Roadline->SetMaterial(0, NorthNeighbourRoad->MFourLines);
-			NorthNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 180));
-			return;
-		}
-		// NORTH NEIGHBOUR WITH 2 neighbours
-		// If North cell has North & East neighbour, change material
-		if (ClosestGridCell->NeighbourNorth->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
-			ClosestGridCell->NeighbourNorth->NeighbourEast->OccupyingType == BuildingTypes::Road)
-		{
-			NorthNeighbourRoad->Roadline->SetMaterial(0, NorthNeighbourRoad->MThreeLines);
-			NorthNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 180));
-			return;
-		}
-		// If North cell has North & West neighbour, change material
-		if (ClosestGridCell->NeighbourNorth->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
-			ClosestGridCell->NeighbourNorth->NeighbourWest->OccupyingType == BuildingTypes::Road)
-		{
-			NorthNeighbourRoad->Roadline->SetMaterial(0, NorthNeighbourRoad->MThreeLines);
-			NorthNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 180)); // ?????? should be 90
-			return;
-		}
-		// If North cell has East & West neighbour, change material
-		if (ClosestGridCell->NeighbourNorth->NeighbourEast->OccupyingType == BuildingTypes::Road &&
-			ClosestGridCell->NeighbourNorth->NeighbourWest->OccupyingType == BuildingTypes::Road)
-		{
-			NorthNeighbourRoad->Roadline->SetMaterial(0, NorthNeighbourRoad->MThreeLines);
-			NorthNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 0)); // ?????? should be 270
-			return;
-		}
-		// NORTH NEIGHBOUR WITH 1 NEIGHBOUR
-		// If North cell has East neighbour
-		if (ClosestGridCell->NeighbourNorth->NeighbourEast->OccupyingType == BuildingTypes::Road)
-		{
-			NorthNeighbourRoad->Roadline->SetMaterial(0, NorthNeighbourRoad->MRoadlineCurve);
-			NorthNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 270));
-			return;
-		}
-		// If the North cell has a West neighbour
-		if (ClosestGridCell->NeighbourNorth->NeighbourWest->OccupyingType == BuildingTypes::Road)
-		{
-			NorthNeighbourRoad->Roadline->SetMaterial(0, NorthNeighbourRoad->MRoadlineCurve);
-			NorthNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 180));
-			return;
-		}
-		// NORTH NEIGHBOUR WITH 0 NEIGHBOUR -> rotate
-		if (ClosestGridCell->NeighbourNorth->NeighbourNorth->OccupyingType == BuildingTypes::None)
-		{
-			NorthNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 90, 0));
-		}
-	}
-	// SOUTH NEIGHBOUR
-	if (ClosestGridCell->NeighbourSouth->OccupyingType == BuildingTypes::Road)
-	{
-		// Rotate road sign of the spawned actor...
-		RoadSpawned->Roadline->AddRelativeRotation(FRotator(0, 90, 0));
-		
-		// 3 NEIGHBOURS
-		// If South cell has South, West & East neighbour, change material South cell
-		if (ClosestGridCell->NeighbourSouth->NeighbourSouth->OccupyingType == BuildingTypes::Road &&
-			ClosestGridCell->NeighbourSouth->NeighbourWest->OccupyingType == BuildingTypes::Road &&
-			ClosestGridCell->NeighbourSouth->NeighbourEast->OccupyingType == BuildingTypes::Road)
-		{
-			SouthNeighbourRoad->Roadline->SetMaterial(0, SouthNeighbourRoad->MFourLines);
-			SouthNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 0));
-			return;
-		}
-		// 2 NEIGHBOURS
-		// If South cell has South & West neighbour, change material south cell
-		if (ClosestGridCell->NeighbourSouth->NeighbourSouth->OccupyingType == BuildingTypes::Road &&
-			ClosestGridCell->NeighbourSouth->NeighbourWest->OccupyingType == BuildingTypes::Road)
-		{
-			SouthNeighbourRoad->Roadline->SetMaterial(0, SouthNeighbourRoad->MThreeLines);
-			SouthNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 0));
-			return;
-		}
-		// If South cell has South & East neighbour, change material south cell
-		if (ClosestGridCell->NeighbourSouth->NeighbourSouth->OccupyingType == BuildingTypes::Road &&
-			ClosestGridCell->NeighbourSouth->NeighbourEast->OccupyingType == BuildingTypes::Road)
-		{
-			SouthNeighbourRoad->Roadline->SetMaterial(0, SouthNeighbourRoad->MThreeLines);
-			SouthNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 180));
-			return;
-		}
-		// If South cell has East & West neighbour, change material south cell
-		if (ClosestGridCell->NeighbourSouth->NeighbourEast->OccupyingType == BuildingTypes::Road &&
-			ClosestGridCell->NeighbourSouth->NeighbourWest->OccupyingType == BuildingTypes::Road)
-		{
-			SouthNeighbourRoad->Roadline->SetMaterial(0, SouthNeighbourRoad->MThreeLines);
-			SouthNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 180)); //???? should be (0,0,90)
-			return;
-		}
-		// 1 NEIGHBOUR
-		// If SOUTH cell has East neighbour
-		if (ClosestGridCell->NeighbourSouth->NeighbourEast->OccupyingType == BuildingTypes::Road)
-		{
-			SouthNeighbourRoad->Roadline->SetMaterial(0, SouthNeighbourRoad->MRoadlineCurve);
-			SouthNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 0));
-			return;
-		}
-		// If the SOUTH cell has a South neighbour
-		if (ClosestGridCell->NeighbourSouth->NeighbourWest->OccupyingType == BuildingTypes::Road)
-		{
-			SouthNeighbourRoad->Roadline->SetMaterial(0, SouthNeighbourRoad->MRoadlineCurve);
-			SouthNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 0, 90));
-			return;
-		}
-		// SOUTH NEIGHBOUR WITH 0 NEIGHBOUR -> rotate
-		if (ClosestGridCell->NeighbourSouth->NeighbourSouth->OccupyingType == BuildingTypes::None)
-		{
-			SouthNeighbourRoad->Roadline->AddRelativeRotation(FRotator(0, 90, 0));
+			Blue("1 line - E or W");
+			IndexRoad->Roadline->SetMaterial(0, RoadSpawned->MRoadlineStraight);
+			IndexRoad->Roadline->SetWorldRotation(FRotator(90, 0, 0));
+			continue;
 		}
 	}
 }
-
 
 //   RAILS    ///
 //***************

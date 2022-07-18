@@ -64,16 +64,14 @@ public:
 
 	/* ROAD BUILDING */
 	bool bAdjacentRoads = false; //check is the building is placeable
-	TArray<ABuildingRoad*> tNeighbouringRoads;
-	TArray< AActorGridCell*> tNeighbouringGridCells;
+	TArray<ABuildingRoad*> tNeighbouringRoads;  // store neighbouring road actors
+	TArray< AActorGridCell*> tNeighbouringGridCells; // store neighbouring grid cell actors
 	
 	void CheckIfBuildingIsPlaceable(AActorGridCell* ClosestGridCell, ABuildings* BuildingSpawned);
 	void CheckAdjacentRoads(AActorGridCell* ClosestGridCell, ABuildings* BuildingSpawned);
 	void AdjustRoadFeatures(AActorGridCell* ClosestGridCell, ABuildings* BuildingSpawned);
-	//TArray<ABuildingRoad*> tNeighbouringRoads;  // store neighbouring roads
 	void AdjustRoadWalkways(AActorGridCell* ClosestGridCell, ABuildings* BuildingSpawned);
 	void AdjustRoadline(AActorGridCell* ClosestGridCell, ABuildings* BuildingSpawned);
-	void AdjustRoadline_Old(AActorGridCell* ClosestGridCell, ABuildings* BuildingSpawned);
 
 	/* RAIL BUILDING */
 	bool bAdjacentRails = false;
