@@ -13,11 +13,11 @@
 #include "Kismet/GameplayStatics.h"
 
 // Macros to call debug text. Syntax: Colour("My text)
-#define Yellow(x) if(GEngine){GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Yellow, FString::Printf(TEXT(x)));}
+#define Yellow(x) if(GEngine){GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, FString::Printf(TEXT(x)));}
 #define Yellow0(x) if(GEngine){GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Yellow, TEXT(x));}
-#define Red(x) if(GEngine){GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Red, TEXT(x));}
-#define Blue(x) if(GEngine){GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Blue, TEXT(x));}
-#define Silver(x) if(GEngine){GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Silver, TEXT(x));}
+#define Red(x) if(GEngine){GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT(x));}
+#define Blue(x) if(GEngine){GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Blue, TEXT(x));}
+#define Silver(x) if(GEngine){GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Silver, TEXT(x));}
 
 
 // Sets default values
@@ -145,12 +145,17 @@ void ABuildingManager::CheckAdjacentRoads(AActorGridCell* ClosestGridCell, ABuil
 
 void ABuildingManager::AdjustRoadFeatures(AActorGridCell* ClosestGridCell, ABuildings* BuildingSpawned)
 {
+	RoadSpawned = Cast<ABuildingRoad>(BuildingSpawned);
 	NorthNeighbourRoad = Cast<ABuildingRoad>(ClosestGridCell->NeighbourNorth->OccupyingActor);
 	SouthNeighbourRoad = Cast<ABuildingRoad>(ClosestGridCell->NeighbourSouth->OccupyingActor);
 	EastNeighbourRoad = Cast<ABuildingRoad>(ClosestGridCell->NeighbourEast->OccupyingActor);
 	WestNeighbourRoad = Cast<ABuildingRoad>(ClosestGridCell->NeighbourWest->OccupyingActor);
-	// Add neighbouring road actors (if present) into the array
-	/*if (NorthNeighbourRoad)
+
+	 //Add neighbouring road actors (if present) into the array 
+	tNeighbouringRoads.Empty();
+
+	tNeighbouringRoads.Add(RoadSpawned);
+	if (NorthNeighbourRoad)
 	{
 		tNeighbouringRoads.Add(NorthNeighbourRoad);
 	}
@@ -165,9 +170,32 @@ void ABuildingManager::AdjustRoadFeatures(AActorGridCell* ClosestGridCell, ABuil
 	if (WestNeighbourRoad)
 	{
 		tNeighbouringRoads.Add(WestNeighbourRoad);
-	}*/
+	}
 
-	RoadSpawned = Cast<ABuildingRoad>(BuildingSpawned);
+	//Add neighbouring grid cells (if present) into the array 
+	tNeighbouringGridCells.Empty();
+
+	tNeighbouringGridCells.Add(ClosestGridCell);
+
+	if (ClosestGridCell->NeighbourNorth->OccupyingType == BuildingTypes::Road)
+	{
+		tNeighbouringGridCells.Add(ClosestGridCell->NeighbourNorth);
+	}
+	if (ClosestGridCell->NeighbourEast->OccupyingType == BuildingTypes::Road)
+	{
+		tNeighbouringGridCells.Add(ClosestGridCell->NeighbourEast);
+	}
+	if (ClosestGridCell->NeighbourWest->OccupyingType == BuildingTypes::Road)
+	{
+		tNeighbouringGridCells.Add(ClosestGridCell->NeighbourWest);
+	}
+	if (ClosestGridCell->NeighbourSouth->OccupyingType == BuildingTypes::Road)
+	{
+		tNeighbouringGridCells.Add(ClosestGridCell->NeighbourSouth);
+	}
+
+	// Debug
+	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Blue, FString::Printf(TEXT("Number neighbouring grid cells: %d"), tNeighbouringGridCells.Num()));
 
 	AdjustRoadWalkways(ClosestGridCell, BuildingSpawned);
 	AdjustRoadline(ClosestGridCell, BuildingSpawned);
@@ -231,7 +259,71 @@ void ABuildingManager::AdjustRoadWalkways(AActorGridCell* ClosestGridCell, ABuil
 	}
 }
 
+
 void ABuildingManager::AdjustRoadline(AActorGridCell* ClosestGridCell, ABuildings* BuildingSpawned)
+{
+	// Check each AGridCell (with occupying actor of type ABuildingRoad) in the array tNeighbouringRoads and adjust roadlines
+	for (AActorGridCell* IndexGridCells : tNeighbouringGridCells)
+	{
+		ABuildingRoad* IndexRoad = Cast<ABuildingRoad>(IndexGridCells->OccupyingActor);
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, FString::Printf(TEXT("Number neighbouring roads: %s"), *IndexRoad->GetActorLabel()));
+
+			if (IndexGridCells->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
+				IndexGridCells->NeighbourSouth->OccupyingType == BuildingTypes::Road &&
+				IndexGridCells->NeighbourEast->OccupyingType == BuildingTypes::Road &&
+				IndexGridCells->NeighbourWest->OccupyingType == BuildingTypes::Road)
+			{
+				Blue("4 lines");
+				IndexRoad->Roadline->SetMaterial(0, RoadSpawned->MFourLines);
+				continue;
+			}
+			
+		
+		/*	IF A ROAD HAS 3 NEIGHBOURS */
+		// North, East, West neighbours
+			if (IndexGridCells->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
+				IndexGridCells->NeighbourWest->OccupyingType == BuildingTypes::Road &&
+				IndexGridCells->NeighbourEast->OccupyingType == BuildingTypes::Road)
+			{
+				Blue("3 lines - N,E,W");
+				IndexRoad->Roadline->SetMaterial(0, RoadSpawned->MThreeLines);
+				IndexRoad->Roadline->SetWorldRotation(FRotator(90, 180, 0));
+				continue;
+			}
+			// South, East, West neighbours
+			else if (IndexGridCells->NeighbourSouth->OccupyingType == BuildingTypes::Road &&
+				IndexGridCells->NeighbourWest->OccupyingType == BuildingTypes::Road &&
+				IndexGridCells->NeighbourEast->OccupyingType == BuildingTypes::Road)
+			{
+				Blue("3 lines - S,E,W");
+				IndexRoad->Roadline->SetMaterial(0, RoadSpawned->MThreeLines);
+				IndexRoad->Roadline->SetWorldRotation(FRotator(90, 0, 0));
+				continue;
+			}
+			// North, South, East neighbours
+			else if (IndexGridCells->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
+				IndexGridCells->NeighbourSouth->OccupyingType == BuildingTypes::Road &&
+				IndexGridCells->NeighbourEast->OccupyingType == BuildingTypes::Road)
+			{
+				Blue("3 lines - N,E,S");
+				IndexRoad->Roadline->SetMaterial(0, RoadSpawned->MThreeLines);
+				IndexRoad->Roadline->SetWorldRotation(FRotator(90, 270, 0));
+				continue;
+			}
+			// North, South, West neighbours
+			else if (IndexGridCells->NeighbourNorth->OccupyingType == BuildingTypes::Road &&
+				IndexGridCells->NeighbourSouth->OccupyingType == BuildingTypes::Road &&
+				IndexGridCells->NeighbourWest->OccupyingType == BuildingTypes::Road)
+			{
+				Blue("3 lines - N,S,W");
+				IndexRoad->Roadline->SetMaterial(0, RoadSpawned->MThreeLines);
+				IndexRoad->Roadline->SetWorldRotation(FRotator(90, 90, 0));
+				continue;
+			}
+	}
+}
+
+void ABuildingManager::AdjustRoadline_Old(AActorGridCell* ClosestGridCell, ABuildings* BuildingSpawned)
 {
 	/* ROTATION SCHEMES FOR ROADLINES DECAL - SetWorldRotation()
 	---------------------------------------------------------------------------------------------------------------------------
